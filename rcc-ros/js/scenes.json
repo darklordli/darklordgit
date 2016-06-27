@@ -1,0 +1,12 @@
+{
+    "scenes": [
+        {
+            "title": "TimeDates",
+            "dis": "This domain fields questions about the current time and date, including time zone conversions."
+        },
+        {
+            "title": "ClockAlarm",
+            "dis": "Controls alarm clock functions"
+        }
+      ]
+}
