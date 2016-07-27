@@ -102,16 +102,10 @@ PS:目前的前端架构依然采用的是传统的js字符串模板(art templat
 
 * * *
 
-### rooboAI业务下
+### rooboAI云
 
-*   目录：pudding1s.roobo.com
-*   更新时间：2016/1/7
-*   pudding1s使用说明H5站
+*   目录：ai.roobo.com
+*   更新时间：2016/7/27
+*   rooboAI云
 *   采用的技术要点：
-*   
-
-
-
-### T1 官方网站
-
-未开始....
+*   UI采用了 amazeui全家桶（amazeui+tagsinput+switch+helper）搭建UI及交互框架。
