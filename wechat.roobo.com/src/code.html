@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_code">
+<head>
+    <meta charset="utf-8">
+    <title>邀请家人</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    @@include('templates/widget_header.html')
+
+</head>
+<body id="code">
+
+<!--wrap-->
+<div id="wrap">
+    <section class="code-box">
+        <div class="share-box">点击这里分享给家人</div>
+        <div class="inner-code">
+            <img v-bind:src=src alt="扫描二维码加入智能故事机微信家庭群">
+            <p>扫描二维码加入智能故事机微信家庭群</p>
+        </div>
+    </section>
+</div>
+
+<!--include footer-->
+@@include('templates/widget_footer.html')
+<script type='text/javascript' src='static/js/components/code.js' charset='utf-8'></script>
+
+<!--include 统计-->
+@@include('templates/widget-statistics.html')
+
+</body>
+</html>

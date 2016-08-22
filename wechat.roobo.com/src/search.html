@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_search">
+<head>
+    <meta charset="utf-8">
+    <title>搜索</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    @@include('templates/widget_header.html')
+
+</head>
+<body v-cloak>
+
+<!--wrap-->
+<div id="wrap">
+    <!-- inner search -->
+    @@include('templates/widget-search.html')
+
+    <!--通过标记位显示搜索历史 -->
+    <div v-if="!showsearch">
+        <!-- 搜索历史 -->
+        <section class="search-history" v-if="historylist.length">
+            <h3>搜索历史</h3>
+            <ul>
+                <li v-for="item in historylist">
+                    <a href="javascript:;" v-on:click.stop.prevent="searchbyhistory(item)" v-cloak>
+                        {{item.keyword}}
+                    </a>
+                </li>
+            </ul>
+            <div class="btn-bar">
+                <button class="btn-default" type="button" v-on:click.stop.prevent="clearhistory()">清除搜索历史</button>
+            </div>
+        </section>
+        <!-- 搜索历史为空 -->
+        <section class="search-null" v-else>
+            <p>搜索历史为空</p>
+        </section>
+    </div>
+
+
+    <template v-if="showsearch">
+        <template v-if="list.data.resources.length">
+            <!-- 搜索结果 -->
+            <section class="search-result">
+                <section class="story-list">
+                    <div class="story-list-hd clearfix">
+                        <span class="rb-left" v-cloak>共{{list.data.resources.length}}首</span>
+                        <!--<button class="rb-right add-btn" type="button">添加全部</button>-->
+                    </div>
+                    <div class="story-list-bd single-list">
+                        <!--试听的audio-->
+                        <audio src="" id="try" style="display:none"></audio>
+                        <template v-for="item in list.data.resources">
+                            <ul>
+                                <li v-on:click.stop.prevent="toggleopen(item)">
+                                    <div class="single-item">
+                                        <!-- active -->
+                                        <button class="demand-btn" type="button" v-on:click.stop.prevent="demand(item)">
+                                            <i class="demand-icon"></i>
+                                        </button>
+                                        <div class="single-infor">
+                                            <p v-cloak>{{item.name}}</p>
+                                            <span class="single-time" v-cloak>{{item.sec}}</span>
+                                        </div>
+                                        <a class="download-btn" href="javascript:;" v-on:click.stop.prevent="download(item)">
+                                            <i class="add-icon"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="operate-icon" v-show="item.isexpand">
+                                        <!-- active -->
+                                        <a href="javascript:;" v-show="!item.isplay"
+                                        v-on:click.stop.prevent="try(item)">
+                                            <i class="audition-icon"></i>
+                                            试听
+                                        </a>
+
+                                        <a class="active" href="javascript:;" v-show="item.isplay"
+                                        v-on:click.stop.prevent="stoptry(item)">
+                                            <i class="audition-icon"></i>
+                                            停止
+                                        </a>
+
+
+                                        <!-- active -->
+                                        <a href="javascript:;" v-show="!item.islike" v-on:click.stop.prevent="addfav(item)">
+                                            <i class="like-icon"></i>
+                                            收藏
+                                        </a>
+                                        <a href="javascript:;" class="active" v-show="item.islike" v-on:click.stop.prevent="dellike(item)">
+                                            <i class="like-icon"></i>
+                                            取消收藏
+                                        </a>
+                                        <a v-on:click.stop.prevent="href(item)">
+                                            <i class="detail-icon"></i>
+                                            详情
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </template>
+                    </div>
+                </section>
+            </section>
+        </template>
+        <!-- 搜索为空 -->
+        <section class="search-null" v-else>
+            <p>无法搜索到相关资源</p>
+        </section>
+    </template>
+
+
+</div>
+
+
+<!--include footer-->
+@@include('templates/widget_footer.html')
+<script type='text/javascript' src='static/js/components/serach.js' charset='utf-8'></script>
+
+<!--include 统计-->
+@@include('templates/widget-statistics.html')
+
+</body>
+</html>

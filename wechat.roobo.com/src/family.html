@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_config">
+<head>
+    <meta charset="utf-8">
+    <title>家庭成员</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    @@include('templates/widget_header.html')
+
+</head>
+<body id="uc">
+
+<!--wrap-->
+<div id="wrap">
+    <section class="family-box">
+      <!--如果是管理员-->
+        <ul v-if="isadmin">
+            <li v-for="item in members" v-on:click.stop.prevent="quitbyadmin(item)">
+                <div class="user-avatar">
+                    <div class="inner-avatar">
+                        <img :src=item.headImgUrl>
+                        <span class="me" v-if="item.self">我</span>
+                    </div>
+                </div>
+                <div class="avatar-name" v-cloak>
+                    {{item.nickname}}
+                </div>
+                <div class="user-permission">
+                    <button type="button" v-if="item.admin">管理员</button>
+                </div>
+            </li>
+            <li>
+                <a class="user-invite" href="code.html"></a>
+                <div class="avatar-name">
+                    邀请家人
+                </div>
+                <div class="user-permission">
+                </div>
+            </li>
+        </ul>
+      <!--/如果是管理员-->
+      <!--如果不是管理员-->
+        <ul v-else>
+            <li v-for="item in members" v-on:click.stop.prevent="quit(item)">
+                <div class="user-avatar">
+                    <div class="inner-avatar">
+                        <img :src=item.headImgUrl>
+                        <span class="me" v-if="item.self">我</span>
+                    </div>
+                </div>
+                <div class="avatar-name" v-cloak>
+                    {{item.nickname}}
+                </div>
+                <div class="user-permission">
+                    <button type="button" v-if="item.admin">管理员</button>
+                </div>
+            </li>
+            <li>
+                <a class="user-invite" href="code.html"></a>
+                <div class="avatar-name">
+                    邀请家人
+                </div>
+                <div class="user-permission">
+                </div>
+            </li>
+        </ul>
+      <!--/如果不是管理员-->
+    </section>
+
+</div>
+
+
+<!--include footer-->
+@@include('templates/widget_footer.html')
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="static/js/modules/wx.config.js"></script>
+<script type='text/javascript' src='static/js/components/config.js' charset='utf-8'></script>
+
+<!--include 统计-->
+@@include('templates/widget-statistics.html')
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+@import "normalize.less";
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); //  remove tap highlight color for mobile safari
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+
+
+/* Custom Base
+   ========================================================================== */
+/**
+ * 1. set base font-size to 10px (16px * 62.5), 1rem = 10px
+ *
+ */
+
+html {
+  /*font-size: 62.5%;*/
+  /* 1 */
+
+  font-size: 10px;
+}
+
+body {
+  position: relative;
+  background: @base-body-background;
+  color: @base-body-color;
+  font-family: @base-body-font-family;
+  font-weight: normal;
+  line-height: 1.5;
+  font-size: @base-body-font-size;
+}
+/**
+ * 1. http://usabilitypost.com/2012/11/15/w-optimizelegibility-on-mobile-devices/
+ * 2. http://maxvoltar.com/archive/-webkit-font-smoothing
+ * NOTE: http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
+ * 3. http://maximilianhoffmann.com/posts/better-font-rendering-on-osx
+ *    http://jaydenseric.com/blog/css-font-smoothing-for-firefox-mac
+ */
+
+body,
+input,
+textarea,
+select,
+button {
+  text-rendering: optimizeLegibility;
+  /* 1 */
+
+  -webkit-font-smoothing: antialiased;
+  /* 2 */
+
+  -moz-osx-font-smoothing: grayscale;
+  /* 3 Default: auto */
+
+  -moz-font-feature-settings: "liga", "kern"
+}
+/**
+ * links
+ */
+
+a {
+  color: @base-link-color;
+  text-decoration: @base-link-text-decoration;
+}
+
+a:hover,
+a:focus {
+  color: @base-link-hover-color;
+}
+
+a:focus {
+  outline: thin dotted;
+  outline: 1px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+/**
+ * images
+ */
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+
+
+/* clearfix */
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+  *zoom: 1;
+}
+
+/* 常用定义
+   ========================================================================== */
+
+blockquote,body,code,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,pre,td,textarea,th,ul {
+  margin: 0;
+  padding: 0
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-size: 100%;
+}
+h1,.h1 {
+  font-size: 36px
+}
+
+h2,.h2 {
+  font-size: 30px
+}
+
+h3,.h3 {
+  font-size: 24px
+}
+
+h4,.h4 {
+  font-size: 18px
+}
+
+h5,.h5 {
+  font-size: 14px
+}
+
+h6,.h6 {
+  font-size: 12px
+}
+
+/* Ordered and unordered lists */
+ul,
+ol {
+  list-style: none;
+}
+
+/* iframe */
+iframe {
+  border: 0;
+}
+
+/* Placeholder
+ ========================================================================== */
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+:-moz-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+/*左右浮动*/
+.rb-right {
+  float: right;
+}
+
+.rb-left {
+  float: left;
+}
+
+/*显示隐藏*/
+.rb-hide {
+  display: none;
+}
+
+.rb-show {
+  display: block;
+}
+
+.rb-invisible {
+  visibility: hidden;
+}
+
+.rb-affix {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/*省略号*/
+.rb-ellipsis {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/*内联块*/
+.rb-inb {
+  display: inline-block;
+  vertical-align: middle;
+  *display: inline;
+  *zoom: 1;
+}
+
+/*强制文本换行*/
+.rb-break-word {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+}
+
+.rb-scrollable-horizontal {
+  overflow: hidden;
+  overflow-x: auto;
+  width: 100%;
+}
+.rb-justify {
+  width: 100%;
+  text-align: justify;
+}
+
+
+

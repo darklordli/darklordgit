@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_singleview">
+<head>
+    <meta charset="utf-8">
+    <title>播放控制</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    <!--include header base-->
+<meta name="author" content="Roobo:F2E">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+
+<!--<link rel="icon" type="image/png" href="img/favicon/favicon.png">-->
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<!--<link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">-->
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="apple-touch-icon-precomposed" href="img/favicon/favicon-57x57.png">-->
+
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="favicon.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+<link rel="stylesheet" href="static/css/weui-a747b2c97e.min.css">
+<link rel="stylesheet" href="static/css/jquery-weui-bd189cf432.css">
+<link rel="stylesheet" href="static/css/app-caa46d4391.css">
+<script src="static/js/components/pxtorem-4e4ea649b7.js"></script>
+
+<!--<script type='text/javascript' src='static/js/lib/1.11.3/jquery-835146b2f7.js' charset='utf-8'></script>-->
+<!--<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>-->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+
+<script type='text/javascript' src='static/js/config/juli_config-9cca9a9cfd.js' charset='utf-8'></script>
+
+<script src="static/js/modules/getopenid-1bf4b910cd.js"></script>
+<script type='text/javascript' src='static/js/util/utils-a46f9bf22f.js' charset='utf-8'></script>
+
+
+</head>
+<body>
+<!--wrap-->
+<div id="wrap">
+    <section class="player-box">
+        <div class="player-animation">
+            <div v-bind:class="['player-center-box',isplay ? 'change-sm':'']"></div>
+        </div>
+        <div class="play-operate">
+            <div class="play-infor">
+                <h2 v-cloak>正在播放：{{title}}</h2>
+                <p><span v-cloak>{{sec}}</span></p>
+            </div>
+            <div class="play-control">
+                <!-- 循环单曲 -->
+                <a class="play-loop" href="javascript:;" v-if="!isloop" v-on:click.stop.prevent="repeatall()">
+                    <i class="loop-one-icon"></i>
+                </a>
+
+                <!-- 循环全部 -->
+                <a class="play-loop" href="javascript:;" v-if="isloop" v-on:click.stop.prevent="repeatone()">
+                    <i class="loop-all-icon"></i>
+                </a>
+
+                <!-- 上一首 -->
+                <a class="play-prev" href="javascript:;" v-on:click.stop.prevent="backward()">
+                    <i class="prev-w-icon"></i>
+                </a>
+
+                <a class="play-lg-icon" href="javascript:;"
+                v-if="!isplay" v-on:click.stop.prevent="play()"></a>
+
+                <!-- stop -->
+                <a class="stop-lg-icon" href="javascript:;"
+                v-if="isplay" v-on:click.stop.prevent="pause()"></a>
+
+                <!-- 下一首 -->
+                <a class="play-next" href="javascript:;" v-on:click.stop.prevent="forward()">
+                    <i class="next-w-icon"></i>
+                </a>
+
+                <a class="play-favorites" href="javascript:;" v-on:click.stop.prevent="addfav()" v-show="!islike">
+                    <i class="favorites-lg-w-icon"></i>
+                </a>
+
+                <a class="play-favorites active" href="javascript:;" v-on:click.stop.prevent="dellike()" v-show="islike">
+                    <i class="favorites-lg-w-icon"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<!--include footer-->
+<!--<script type='text/javascript' src='static/js/lib/vue-4f718d0686.js' charset='utf-8'></script>-->
+<!--<script src="static/js/lib/jquery-weui-9911829e41.min.js"></script>-->
+
+<script src="//cdn.bootcss.com/vue/1.0.26/vue.js"></script>
+<script src="//cdn.bootcss.com/jquery-weui/0.8.0/js/jquery-weui.min.js"></script>
+
+<script src="static/js/lib/mqttws31-5164ce8625.js"></script>
+<script src="static/js/lib/mqttclient-e25774ed12.js"></script>
+
+<script type='text/javascript' src='static/js/components/singleview-e3ee8ed5db.js'></script>
+
+<!--include 统计-->
+<div class="rb-hide">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260165804'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260165804' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+
+</body>
+</html>

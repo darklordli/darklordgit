@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_favlist">
+<head>
+    <meta charset="utf-8">
+    <title>收藏</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    @@include('templates/widget_header.html')
+
+</head>
+<body id="uc">
+
+<!--wrap-->
+<div id="wrap">
+    <section class="mode-list">
+        <div class="mode-list-hd clearfix">
+            <h3 class="rb-left">
+                <i class="favorites-icon"></i>
+                收藏/
+                <b v-cloak>{{list.length}}</b>
+            </h3>
+        </div>
+        <div class="mode-list-bd">
+            <ul>
+                <li v-for="item in list">
+                    <a class="mode-df" href="javascript:void(0)">
+                        <!--demand-->
+                        <button class="demand-btn" type="button" v-on:click.stop.prevent="demand(item)">
+                            <i class="demand-icon"></i>
+                        </button>
+                        <!--stop-->
+                        <!--<button class="demand-btn demand-btn-active" type="button" v-show="item.isplay" v-on:click.stop.prevent="pause(item)">-->
+                            <!--<i class="demand-icon"></i>-->
+                        <!--</button>-->
+
+                        <div class="mode-inner">
+                            <p v-cloak>{{item.title}}</p>
+                            <span class="single-time" v-cloak>{{item.sec}}</span>
+                        </div>
+                        <div class="mode-control">
+                            <button class="plus-btn" type="button" @click="download(item)">
+                                <i class="plus-icon"></i>
+                            </button>
+                            <button class="close-btn" type="button" @click="del(item)">
+                                <i class="close-icon"></i>
+                            </button>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+<!--include footer-->
+@@include('templates/widget_footer.html')
+<script type='text/javascript' src='static/js/components/like.js' charset='utf-8'></script>
+
+<!--include 统计-->
+@@include('templates/widget-statistics.html')
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_search">
+<head>
+    <meta charset="utf-8">
+    <title>故事机-搜索</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    <meta name="author" content="Roobo:F2E">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+
+<!--<link rel="icon" type="image/png" href="img/favicon/favicon.png">-->
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<!--<link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">-->
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="apple-touch-icon-precomposed" href="img/favicon/favicon-57x57.png">-->
+
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="favicon.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+<link rel="stylesheet" href="static/css/app.css">
+<script src="static/js/components/pxtorem.js"></script>
+
+
+</head>
+<body>
+
+<!--wrap-->
+<div id="wrap">
+    <!-- inner search -->
+    <section class="search-bar search-sm-bar">
+    <div class="inner-search">
+        <input v-model="input" @keyup.13="decide('input')" type="text" id='search' placeholder='搜索歌曲、故事'/>
+        <button type="button"><i class="search-icon"></i></button>
+    </div>
+</section>
+
+    <!--通过标记位显示搜索历史 -->
+    <div v-if="!showsearch">
+        <!-- 搜索历史 -->
+        <section class="search-history" v-if="historylist.length">
+            <h3>搜索历史</h3>
+            <ul>
+                <li>
+                    <a v-for="item in historylist" href="javascript:;" v-on:click.stop.prevent="searchbyhistory(item)">
+                        {{item.keyword}}
+                    </a>
+                </li>
+            </ul>
+            <div class="btn-bar">
+                <button class="btn-default" type="button" v-on:click.stop.prevent="clearhistory()">清除搜索历史</button>
+            </div>
+        </section>
+        <!-- 搜索历史为空 -->
+        <section class="search-null" v-else>
+            <p>搜索历史为空</p>
+        </section>
+    </div>
+
+
+    <template v-if="showsearch">
+        <template v-if="list.data.resources.length">
+            <!-- 搜索结果 -->
+            <section class="search-result">
+                <section class="story-list">
+                    <div class="story-list-hd clearfix">
+                        <span class="rb-left">共{{list.data.resources.length}}首</span>
+                        <!--<button class="rb-right add-btn" type="button">添加全部</button>-->
+                    </div>
+                    <div class="story-list-bd single-list">
+                        <!--试听的audio-->
+                        <audio src="" id="try" style="display:none"></audio>
+                        <template v-for="item in list.data.resources">
+                            <ul>
+                                <li v-on:click.stop.prevent="toggleopen($index)">
+                                    <div class="single-item">
+                                        <!-- active -->
+                                        <button class="demand-btn" type="button" v-on:click.stop.prevent="demand(item)">
+                                            <i class="demand-icon"></i>
+                                        </button>
+                                        <div class="single-infor">
+                                            <p>{{item.name}}</p>
+                                            <span class="single-time">{{item.sec}}</span>
+                                        </div>
+                                        <a class="download-btn" href="javascript:;" v-on:click.stop.prevent="download(item)">
+                                            <i class="add-icon"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="operate-icon" v-show="item.isexpand">
+                                        <!-- active -->
+                                        <a href="javascript:;" v-on:click.stop.prevent="try(item.content)">
+                                            <i class="audition-icon"></i>
+                                            试听
+                                        </a>
+                                        <!-- active -->
+                                        <a href="javascript:;" v-show="!islike" v-on:click.stop.prevent="addfav(item)">
+                                            <i class="like-icon"></i>
+                                            收藏
+                                        </a>
+                                        <a href="javascript:;" v-show="islike" v-on:click.stop.prevent="dellike(item)">
+                                            <i class="like-icon"></i>
+                                            收藏
+                                        </a>
+                                        <a href="single.html?id={{item.id}}">
+                                            <i class="detail-icon"></i>
+                                            详情
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </template>
+                    </div>
+                </section>
+            </section>
+        </template>
+        <!-- 搜索为空 -->
+        <section class="search-null" v-else>
+            <p>无法搜索到相关资源</p>
+        </section>
+    </template>
+
+
+</div>
+
+
+<!--include footer-->
+<script type='text/javascript' src='static/js/lib/vue.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/lib/1.11.3/jquery.js' charset='utf-8'></script>
+
+<script src="static/js/lib/jquery-weui.min.js"></script>
+<script src="static/js/components/swiper.jquery.js"></script>
+<script src="static/js/components/fastclick.js"></script>
+<script src="static/js/modules/getopenid.js"></script>
+
+<script type='text/javascript' src='static/js/util/utils.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/config/juli_config.js' charset='utf-8'></script>
+<script src="static/js/lib/mqttws31.js"></script>
+<script src="static/js/lib/mqttclient.js"></script>
+<script src="static/js/modules/wx.config.js"></script>
+<script src="static/js/app.js"></script>
+
+<script type='text/javascript' src='static/js/components/serach.js' charset='utf-8'></script>
+
+</body>
+</html>

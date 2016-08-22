@@ -1,0 +1,194 @@
+.list-group.list a{
+    padding-top: 8px;
+    padding-left: 56px;
+    min-height: 50px;
+    background-repeat:no-repeat;
+    background-position:10px 10px;
+    background-size:40px 40px;
+}
+
+.list-group.list a img{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 40px;
+    max-height: 40px;
+    width: 100%;
+    height: 100%;
+}
+
+.list-group.list a h3{
+	margin: 0 0 2px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color:#555;
+}
+
+.list-group.list.empty{
+	background-image:url(../img/music_note_Green.png);
+    background-repeat:no-repeat;
+    background-position:center center;
+    min-height: 100px;
+}
+
+
+#pageTrack .list-group li{
+    padding-top: 5px;
+    padding-left: 40px;
+    min-height: 20px;
+}
+
+#pageTrack .list-group li label.trackselectbox{
+    display:none;
+}
+
+#pageTrack .list-group li.editing label.trackselectbox{
+    display:block;
+    
+}
+
+#pageTrack .list-group li div.list-index{
+	position: absolute;
+    top: 10px;
+    left: 10px;
+    width:10px;
+    height:100%;
+    text-align:center;
+}
+
+#trackList_pageTrack a{
+    padding-top: 8px;
+    padding-left: 76px;
+    min-height: 80px;
+}
+
+#trackList_pageTrack a img{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 50px;
+    max-height: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+#trackList_pageTrack a h3{
+	margin: 0 0 2px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color:#555;
+}
+
+#pageTrack .commandbar .btnTrackListRemove{
+    border-color: transparent;
+    background-color: transparent;
+    background-image:url(../img/btn_del.png);
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:24px 24px;
+    padding-left: 30px;
+}
+
+#pageTrack .commandbar .btnTrackListEdit{
+    border-color: transparent;
+    background-color: transparent;
+    background-image:url(../img/btn_list.png);
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:20px 20px;
+}
+
+#pageTrack .commandbar .btnCancel{
+    border-color: transparent;
+    background-color: transparent;
+    display: none;
+    color:#60c4e9;
+    font-weight: bold;
+}
+
+#pageTrack .commandbar .btnSelectAll{
+    border-color: transparent;
+    background-color: transparent;
+    display: none;
+    color:#60c4e9;
+    font-weight: bold;
+}
+
+#divRemoveEdit .remove {
+    border-right:1px solid #e7e7e7;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+#divRemoveEdit .edit {
+    padding-top:5px;
+    padding-bottom:5px;   
+}
+
+#divCancelEdit .cancel {
+    padding-top:5px;
+    padding-bottom:5px;   
+}
+
+  
+
+
+.controlboxfooter{
+    padding:5px;
+    background-color:#fff;
+}
+
+.controlboxfooter button{
+   display: inline-block;
+    width:50px;
+    height:50px;
+    border-color: transparent;
+    background-color: transparent;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+
+.controlboxfooter button.setmode{
+    background-image:url(../img/repeatall.png);
+    background-size: 32px;
+}
+
+.controlboxfooter button.setmode.repeatone{
+    background-image:url(../img/repeatone.png);
+    background-size: 32px;
+}
+
+.controlboxfooter button.selectlist{
+    background-image:url(../img/selectlist.png);
+    background-size: 32px;
+}
+
+.controlboxfooter button.forward{
+    background-image:url(../img/forward.png);
+    background-size: 32px;
+}
+
+.controlboxfooter button.backward{
+    background-image:url(../img/backward.png);
+    background-size: 32px;
+}
+
+.controlboxfooter button.control{
+    background-image:url(../img/play.png);
+    background-size: 48px;
+}
+
+.controlboxfooter button.control.pause{
+    background-image:url(../img/pause.png);
+    background-size: 48px;
+}
+
+.controlboxfooter marquee{
+    display: block;
+}
+
+.controlboxfooter #description{
+    font-size: 12px;
+    font-weight: normal;
+    color: #a7a7a7;
+}

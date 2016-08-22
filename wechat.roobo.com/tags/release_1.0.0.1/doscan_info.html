@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>提示页</title>
+	<link href="http://wechat.roobo.com/storybox/resources/theme1/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.container{
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-image: url("http://wechat.roobo.com/storybox/resources/theme1/img/btn_logo_b.png");
+			min-height: 300px;
+		}
+
+		.navbar-fixed-bottom span{
+			margin-bottom: 20px;
+			font-size: 16px;
+		}
+
+	</style>
+</head>
+
+<body style="background-color: #f1f1f1;">
+	<div class="container">
+		<div class="navbar-fixed-bottom text-center">
+			<span>还没有绑定故事机</span>
+			<button type="button" class="btn btn-success btn-lg btn-block J-scan">扫一扫</button>
+		</div>
+	</div>
+
+	<script src="static/js/lib/1.11.3/jquery.js"></script>
+	<script src="static/js/config/juli_config.js"></script>
+
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="static/js/modules/wx.config.js"></script>
+	<script src="static/js/components/scan.js"></script>
+
+
+	<script>
+
+		(function () {
+			var agent = navigator.userAgent.toLowerCase();        //检测是否是ios
+			var iLastTouch = null;                                //缓存上一次tap的时间
+			if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0) {
+				document.body.addEventListener('touchend', function (event) {
+					var iNow = new Date().getTime();
+					iLastTouch = iLastTouch || iNow + 1 /** 第一次时将iLastTouch设为当前时间+1 */;
+					var delta = iNow - iLastTouch;
+					if (delta < 500 && delta > 0) {
+						event.preventDefault();
+						return false;
+					}
+					iLastTouch = iNow;
+				}, false);
+			}
+
+		})();
+
+	</script>
+</body>
+</html>

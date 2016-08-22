@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>配置网络</title>
+	<link href="http://wechat.roobo.com/storybox/resources/theme1/css/weui.min.css" rel="stylesheet">
+	<link href="http://wechat.roobo.com/storybox/resources/theme1/css/common.css" rel="stylesheet">
+	<style type="text/css">
+		.hd {
+		    padding: 2em 0;
+		    background-image:url(http://wechat.roobo.com/storybox/resources/theme1/img/pic_wifi.png);
+ 			background-repeat:no-repeat;
+ 			background-position:center center;
+ 			height: 150px;
+ 			background-size: 130px 130px;
+		}
+
+		.page_title {
+		    text-align: center;
+		    font-size: 34px;
+		    color: #225fba;
+		    font-weight: 400;
+		    margin: 0 15%;
+		}
+	</style>
+	<script src="static/js/lib/1.11.3/jquery.js"></script>
+	<script src="static/js/lib/mqttws31.js"></script>
+	<script src="static/js/lib/audiojs/audio.js"></script>
+	<script src="static/js/modules/mqttclient.js"></script>
+
+</head>
+
+<body>
+	<div class="hd">
+
+	</div>
+	<div class="weui_cells weui_cells_form">
+	    <div class="weui_cell">
+	        <div class="weui_cell_hd">
+	            <label class="weui_label">WIFI</label>
+	        </div>
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <input name="ssid" class="weui_input" type="text" placeholder="请输入WIFI名称">
+	        </div>
+	        <div class="weui_cell_ft">
+                <i class="weui_icon_warn"></i>
+            </div>
+	    </div>
+	    <div class="weui_cell">
+	        <div class="weui_cell_hd">
+	            <label class="weui_label">密码</label>
+	        </div>
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <input name="password" class="weui_input" type="password" placeholder="请输入WIFI密码">
+	        </div>
+	    </div>
+
+	</div>
+	<div class="weui_cells_tips"></div>
+	<div class="weui_btn_area">
+        <a class="weui_btn weui_btn_primary" id="btnConnect">连接</a>
+    </div>
+	<input type="hidden" name="openid" value="oTv0AxFhlHCj0CsFY9IwsOb511NI" />
+	<input type="hidden" name="deviceId" value="3000000000100007_207" />
+
+	<div id="loadingToast" class="weui_loading_toast" style="display:none;">
+	    <div class="weui_mask_transparent"></div>
+	    <div class="weui_toast">
+	        <div class="weui_loading">
+	            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+	        </div>
+	        <p class="weui_toast_content">配置中</p>
+	    </div>
+	</div>
+
+	<div id="toast" style="display: none;">
+	    <div class="weui_mask_transparent"></div>
+	    <div class="weui_toast">
+	        <i class="weui_icon_toast"></i>
+	        <p class="weui_toast_content">配置成功</p>
+	    </div>
+	</div>
+
+	<div class="weui_dialog_alert" id="dialog2" style="display: none;">
+	    <div class="weui_mask"></div>
+	    <div class="weui_dialog">
+	        <div class="weui_dialog_hd"><strong class="weui_dialog_title">配置超时</strong></div>
+	        <div class="weui_dialog_bd">配置超时，请重新连接</div>
+	        <div class="weui_dialog_ft">
+	            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+	        </div>
+	    </div>
+	</div>
+	<div id="divAudio" class="audiohide">
+		<audio preload loop="loop"></audio>
+	</div>
+
+	<script src="static/js/config/juli_config.js"></script>
+
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="static/js/modules/wx.config.js"></script>
+	<script src="static/js/modules/getopenid.js"></script>
+	<script src="static/js/components/wifi.js"></script>
+
+</body>
+</html>

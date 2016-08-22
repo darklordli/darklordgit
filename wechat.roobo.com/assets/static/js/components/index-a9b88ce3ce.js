@@ -1,0 +1,1 @@
+listvm=new Vue({el:"#j_index",data:{list:"",input:"",imghost:"http://dwn.roo.bo/appimg/"},ready:function(){this.getdata()},methods:{getdata:function(){$.ajax({url:juli.URL.cate,type:"get",dataType:"json",cache:!1}).done(function(t){listvm.list=t})},search:function(){location.href="search.html?search="+this.input}}});

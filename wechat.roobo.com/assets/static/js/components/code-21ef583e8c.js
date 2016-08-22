@@ -1,0 +1,1 @@
+codeVM=new Vue({el:"#j_code",data:{src:""},ready:function(){this.getdata()},methods:{getdata:function(){var e=this;$.ajax({url:juli.URL.getcode+"?deviceId="+utils.getdevice(),type:"get",cache:!1}).done(function(t){e.$data.src=t})}}});

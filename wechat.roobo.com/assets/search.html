@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_search">
+<head>
+    <meta charset="utf-8">
+    <title>搜索</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    <!--include header base-->
+<meta name="author" content="Roobo:F2E">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+
+<!--<link rel="icon" type="image/png" href="img/favicon/favicon.png">-->
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<!--<link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">-->
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="apple-touch-icon-precomposed" href="img/favicon/favicon-57x57.png">-->
+
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="favicon.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+<link rel="stylesheet" href="static/css/weui-a747b2c97e.min.css">
+<link rel="stylesheet" href="static/css/jquery-weui-bd189cf432.css">
+<link rel="stylesheet" href="static/css/app-caa46d4391.css">
+<script src="static/js/components/pxtorem-4e4ea649b7.js"></script>
+
+<!--<script type='text/javascript' src='static/js/lib/1.11.3/jquery-835146b2f7.js' charset='utf-8'></script>-->
+<!--<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>-->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+
+<script type='text/javascript' src='static/js/config/juli_config-9cca9a9cfd.js' charset='utf-8'></script>
+
+<script src="static/js/modules/getopenid-1bf4b910cd.js"></script>
+<script type='text/javascript' src='static/js/util/utils-a46f9bf22f.js' charset='utf-8'></script>
+
+
+</head>
+<body v-cloak>
+
+<!--wrap-->
+<div id="wrap">
+    <!-- inner search -->
+    <section class="search-bar search-sm-bar">
+    <div class="inner-search">
+        <input v-model="input" @keyup.13="decide('input')" type="text" id='search' placeholder='搜索歌曲、故事'/>
+        <button type="button" v-on:click.stop.prevent="decide('input')"><i class="search-icon"></i></button>
+    </div>
+</section>
+
+
+    <!--通过标记位显示搜索历史 -->
+    <div v-if="!showsearch">
+        <!-- 搜索历史 -->
+        <section class="search-history" v-if="historylist.length">
+            <h3>搜索历史</h3>
+            <ul>
+                <li v-for="item in historylist">
+                    <a href="javascript:;" v-on:click.stop.prevent="searchbyhistory(item)" v-cloak>
+                        {{item.keyword}}
+                    </a>
+                </li>
+            </ul>
+            <div class="btn-bar">
+                <button class="btn-default" type="button" v-on:click.stop.prevent="clearhistory()">清除搜索历史</button>
+            </div>
+        </section>
+        <!-- 搜索历史为空 -->
+        <section class="search-null" v-else>
+            <p>搜索历史为空</p>
+        </section>
+    </div>
+
+
+    <template v-if="showsearch">
+        <template v-if="list.data.resources.length">
+            <!-- 搜索结果 -->
+            <section class="search-result">
+                <section class="story-list">
+                    <div class="story-list-hd clearfix">
+                        <span class="rb-left" v-cloak>共{{list.data.resources.length}}首</span>
+                        <!--<button class="rb-right add-btn" type="button">添加全部</button>-->
+                    </div>
+                    <div class="story-list-bd single-list">
+                        <!--试听的audio-->
+                        <audio src="" id="try" style="display:none"></audio>
+                        <template v-for="item in list.data.resources">
+                            <ul>
+                                <li v-on:click.stop.prevent="toggleopen(item)">
+                                    <div class="single-item">
+                                        <!-- active -->
+                                        <button class="demand-btn" type="button" v-on:click.stop.prevent="demand(item)">
+                                            <i class="demand-icon"></i>
+                                        </button>
+                                        <div class="single-infor">
+                                            <p v-cloak>{{item.name}}</p>
+                                            <span class="single-time" v-cloak>{{item.sec}}</span>
+                                        </div>
+                                        <a class="download-btn" href="javascript:;" v-on:click.stop.prevent="download(item)">
+                                            <i class="add-icon"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="operate-icon" v-show="item.isexpand">
+                                        <!-- active -->
+                                        <a href="javascript:;" v-show="!item.isplay"
+                                        v-on:click.stop.prevent="try(item)">
+                                            <i class="audition-icon"></i>
+                                            试听
+                                        </a>
+
+                                        <a class="active" href="javascript:;" v-show="item.isplay"
+                                        v-on:click.stop.prevent="stoptry(item)">
+                                            <i class="audition-icon"></i>
+                                            停止
+                                        </a>
+
+
+                                        <!-- active -->
+                                        <a href="javascript:;" v-show="!item.islike" v-on:click.stop.prevent="addfav(item)">
+                                            <i class="like-icon"></i>
+                                            收藏
+                                        </a>
+                                        <a href="javascript:;" class="active" v-show="item.islike" v-on:click.stop.prevent="dellike(item)">
+                                            <i class="like-icon"></i>
+                                            取消收藏
+                                        </a>
+                                        <a v-on:click.stop.prevent="href(item)">
+                                            <i class="detail-icon"></i>
+                                            详情
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </template>
+                    </div>
+                </section>
+            </section>
+        </template>
+        <!-- 搜索为空 -->
+        <section class="search-null" v-else>
+            <p>无法搜索到相关资源</p>
+        </section>
+    </template>
+
+
+</div>
+
+
+<!--include footer-->
+<!--<script type='text/javascript' src='static/js/lib/vue-4f718d0686.js' charset='utf-8'></script>-->
+<!--<script src="static/js/lib/jquery-weui-9911829e41.min.js"></script>-->
+
+<script src="//cdn.bootcss.com/vue/1.0.26/vue.js"></script>
+<script src="//cdn.bootcss.com/jquery-weui/0.8.0/js/jquery-weui.min.js"></script>
+
+<script src="static/js/lib/mqttws31-5164ce8625.js"></script>
+<script src="static/js/lib/mqttclient-e25774ed12.js"></script>
+
+<script type='text/javascript' src='static/js/components/serach-889ceb2ea2.js' charset='utf-8'></script>
+
+<!--include 统计-->
+<div class="rb-hide">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260165804'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260165804' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+
+</body>
+</html>
