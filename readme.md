@@ -146,7 +146,7 @@ PS: 经过开发体验，MQTT非常强大，搭建一个MQTT的消息SERVER成�
 ######UI框架部分：
 
 这是需要快速搭建起H5页面及交互部分的需求，在开发初期在对mui以及淘宝的 SUI MOBILE进行选型之后，都没有进行选择，原因是设计稿中虽然有列表式的布局，但大量的还是自定义的ICON,列表样式，播放控制界面，用mui以及SUI MOBILE的限制太多，不太适用，采用了微信出品的 JQUERY-WEUI,WEUI的jquery实现版....其提供的actionsheet，alert，confirm等组件对于微信公众号的页面来说风格十分契合。
-主体页面均使用REM手动自己布局..
+主体页面均使用REM手动自己布局+部分使用font Awesome提供的图标（font Awesome现在可是github上第一大开源项目。。。 ）
 
 （jQuery WeUI 中使用的是官方 WeUI 的 CSS 代码，并提供了 jQuery/Zepto 版本的 API 实现。因为直接使用了官方的 CSS，所以你不用担心跟官方版本的冲突。实际上 jQuery WeUI == WeUI + jQuery 插件。）
 
@@ -165,19 +165,18 @@ PS: 经过开发体验，MQTT非常强大，搭建一个MQTT的消息SERVER成�
 
 ######2016/9/8 mark一下使用vue中遇到的一个诡异bug：
 
-在做vue开发时，页面的vue实例编译完成之前，需要隐藏html模板中未编译好的内容，在VUE中有v-clock这个api,添加到标签中，并且在css中加入[v-clock] {display:none} 来避免模块的闪烁。
+在做vue开发时，页面的vue实例编译完成之前，需要隐藏html模板中未编译好的内容，在VUE中有v-cloak 这个api,添加到标签中，并且在css中加入[v-clock] {display:none} 来避免模块的闪烁。
 而实际上，出现了个别的页面（家庭成员页，资源详情页），v-clock失去了作用。
 实际修改的 历程经过了下面几个阶段
 
 1 没有加clock,自然是会出现闪烁
 
-2 在需要避免闪烁的容器上加入了v-clock，并且将[v-clock] {display:none} 加入到了header中加载的css文件中，不起作用
+2 在需要避免闪烁的容器上加入了v-cloak，并且将[v-cloak] {display:none} 加入到了header中加载的css文件中，不起作用
 
 3 google了一下,在http://www.cnblogs.com/whitewolf/p/3495822.html 中作者遇到了同样的问题，思考了一下浏览器渲染的机制，渲染html的速度可能会比并行加载header中css的速度还快，所以将[v-clock] {display:none} 放到了html的 header中,依然不起作用
 
-4 看了一下 [v-clock] {display:none} 这句css, [v-clock] 是一个属性选择器，他的意思是 选择所有包含有 v-clock 这个属性的DOM容器,在css中属性选择器的优先级是很低的，与class的 优先级相同，所以会不会 有别的 css的定义比他的 优先级高，所以覆盖了 display:none呢，所以改为  [v-clock] {display:none} ，但依然不起作用！！
+4 看了一下 [v-cloak] {display:none} 这句css, [v-cloak] 是一个属性选择器，他的意思是 选择所有包含有 v-clock 这个属性的DOM容器,在css中属性选择器的优先级是很低的，与class的 优先级相同，所以会不会 有别的 css的定义比他的 优先级高，所以覆盖了 display:none呢，所以改为  [v-cloak] {display:none!important} ，成功解决。
 
-此问题暂时没有解出，待日后思考和解决....
 
 
 
