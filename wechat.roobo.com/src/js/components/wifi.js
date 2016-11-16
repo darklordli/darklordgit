@@ -35,7 +35,14 @@ $(function () {
 
     $("input[name=ssid]").change(function () {
         checkSsid();
+        console.log(111);
     });
+
+    var ssid= window.localStorage.getItem("ssid");
+    var password= window.localStorage.getItem("ssidpassword");
+
+    $("input[name=ssid]").val(ssid);
+    $("input[name=password]").val(password);
 
     clientCreate(onConnectCallback);
 });
@@ -71,27 +78,29 @@ $("#btnConnect").click(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://wechat.roobo.com/storybox/sinvoice/set.do",
-            // url: "http://localhost:8080/storybox/sinvoice/set.do",
+            url: juli.URL.sinvoice,
             contentType: 'application/json',
             async: false,
             timeout: 4000,
             data: JSON.stringify(sinVoiceSet),
             success: function (msg) {
-                var fileUrl = msg;
-                
-                //wait 2 second then play
-                setTimeout(function(){
-                    console.log("start to play:"+fileUrl);
-                    audio.load(fileUrl);
-                    audio.play();
-                },2000);
+                var fileUrl = msg + "?date=" + new Date().getTime();
+                console.log("fileUrl:"+fileUrl)
+                var _src = $(audio.element).attr('src');
+
+                if (_src !== undefined){
+                    $(audio.element).attr('src', '');
+                }
+                audio.load(fileUrl);
+                audio.play();
 
                 for(var j = 0;j < (waitSeconds/2);j++) {
                     setTimeout(checkIfConnected,1000*j*2);
                 }
 
                 setTimeout(checkIfTimeout,1000*(waitSeconds+1));
+                window.localStorage.setItem("ssid",ssid);
+                window.localStorage.setItem("ssidpassword",password);
 
             },
             error: function (data) {
@@ -111,6 +120,7 @@ function checkIfConnected() {
     console.log("checkIfConnected");
     if (!window.configResult) {
         // $("#loadingToast").show();
+        // $('.weui_toast').remove();
         $.showLoading("配置中");
     }
     else {
@@ -157,6 +167,3 @@ function playSinVoiceUrl(url, openId) {
         audio.play();
     }
 }
-
-
-

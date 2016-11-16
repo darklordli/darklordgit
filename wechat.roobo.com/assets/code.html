@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" id="j_code">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <title>邀请家人</title>
@@ -32,18 +32,20 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
 <link rel="stylesheet" href="static/css/weui-a747b2c97e.min.css">
-<link rel="stylesheet" href="static/css/jquery-weui-bd189cf432.css">
-<link rel="stylesheet" href="static/css/app-caa46d4391.css">
+<link rel="stylesheet" href="static/css/jquery-weui-b76c9e6ade.css">
+<link rel="stylesheet" href="static/css/app-8d9c2e7f2b.css">
 <script src="static/js/components/pxtorem-4e4ea649b7.js"></script>
 
 <!--<script type='text/javascript' src='static/js/lib/1.11.3/jquery-835146b2f7.js' charset='utf-8'></script>-->
 <!--<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
 
-<script type='text/javascript' src='static/js/config/juli_config-9cca9a9cfd.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/config/juli_config-079eaa7cf6.js' charset='utf-8'></script>
+<style>[v-cloak] {display: none!important}</style>
 
-<script src="static/js/modules/getopenid-1bf4b910cd.js"></script>
-<script type='text/javascript' src='static/js/util/utils-a46f9bf22f.js' charset='utf-8'></script>
+
+<script src="static/js/modules/getopenid-3d97e9f34d.js"></script>
+<script type='text/javascript' src='static/js/util/utils-3643d49506.js' charset='utf-8'></script>
 
 
 </head>
@@ -54,23 +56,59 @@
     <section class="code-box">
         <div class="share-box">点击这里分享给家人</div>
         <div class="inner-code">
-            <img v-bind:src=src alt="扫描二维码加入智能故事机微信家庭群">
-            <p>扫描二维码加入智能故事机微信家庭群</p>
+            <img v-bind:src=src>
+            <p v-text="tip"></p>
         </div>
     </section>
 </div>
 
 <!--include footer-->
-<!--<script type='text/javascript' src='static/js/lib/vue-4f718d0686.js' charset='utf-8'></script>-->
+<!--<script type='text/javascript' src='static/js/lib/vue-cd279402bf.js' charset='utf-8'></script>-->
 <!--<script src="static/js/lib/jquery-weui-9911829e41.min.js"></script>-->
 
 <script src="//cdn.bootcss.com/vue/1.0.26/vue.js"></script>
 <script src="//cdn.bootcss.com/jquery-weui/0.8.0/js/jquery-weui.min.js"></script>
 
 <script src="static/js/lib/mqttws31-5164ce8625.js"></script>
-<script src="static/js/lib/mqttclient-e25774ed12.js"></script>
+<script src="static/js/lib/mqttclient-fc76ad90c1.js"></script>
 
-<script type='text/javascript' src='static/js/components/code-21ef583e8c.js' charset='utf-8'></script>
+<script src='static/js/config/juli_config-079eaa7cf6.js'></script>
+<script src='static/js/components/code-a6dc9bc26d.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="static/js/modules/wx-ed24beff0c.config.js"></script>
+<script>
+    var _did = window.deviceId || "3000000000100004";
+    wx.ready(function () {
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '您的好友想把您加入聊天群组', // 分享标题
+            link: window.juli.host + window.juli.dir +"/assets/share.html?did=" +_did, // 分享链接
+            imgUrl:  window.juli.host + window.juli.dir + "/assets/static/img/logo-lg.jpg", // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        // 分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '您的好友想把您加入聊天群组', // 分享标题
+            desc: '您的好友想把您加入故事机的聊天群组', // 分享描述
+            link:  window.juli.host + window.juli.dir +"/assets/share.html?did=" +_did, // 分享链接
+            imgUrl: window.juli.host + window.juli.dir + '/assets/static/img/juli-logo.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+</script>
 
 <!--include 统计-->
 <div class="rb-hide">

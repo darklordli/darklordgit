@@ -1,7 +1,7 @@
 
 # Roobo前端项目目录
 
-##### m.roobo.com
+##### m.roobo.com   roobo官网主站移动版h5版
 *   目录：www.roobo.com/rmall
 *   更新时间：2016/3/23
 *   采用的技术要点：

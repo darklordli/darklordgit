@@ -21,11 +21,14 @@
     <div v-if="!showsearch">
         <!-- 搜索历史 -->
         <section class="search-history" v-if="historylist.length">
-            <h3>搜索历史</h3>
+            <h3>搜索历史
+            <span class="copyright-list" v-show="babateng" v-cloak>Powered by roobo</span>
+            </h3>
             <ul>
                 <li v-for="item in historylist">
-                    <a href="javascript:;" v-on:click.stop.prevent="searchbyhistory(item)" v-cloak>
-                        {{item.keyword}}
+                    <a href="javascript:;"
+                    v-on:click.stop.prevent="searchbyhistory(item)"
+                     v-text="item.keyword">
                     </a>
                 </li>
             </ul>
@@ -48,6 +51,7 @@
                     <div class="story-list-hd clearfix">
                         <span class="rb-left" v-cloak>共{{list.data.resources.length}}首</span>
                         <!--<button class="rb-right add-btn" type="button">添加全部</button>-->
+                        <span class="copyright-list" v-show="babateng" v-cloak>Powered by roobo</span>
                     </div>
                     <div class="story-list-bd single-list">
                         <!--试听的audio-->
@@ -105,15 +109,16 @@
                 </section>
             </section>
         </template>
+
         <!-- 搜索为空 -->
         <section class="search-null" v-else>
             <p>无法搜索到相关资源</p>
         </section>
+
     </template>
 
-
 </div>
-
+    <input type="text" id="select" style="display:none">
 
 <!--include footer-->
 @@include('templates/widget_footer.html')

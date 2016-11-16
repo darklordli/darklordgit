@@ -11,7 +11,6 @@
 
 </head>
 <body id="uc">
-
 <!--wrap-->
 <div id="wrap">
     <section class="mode-list">
@@ -19,10 +18,13 @@
             <h3 class="rb-left">
                 <i class="favorites-icon"></i>
                 收藏/
-                <b v-cloak>{{list.length}}</b>
+                <b v-text="list.length" v-if="list.length"></b>
             </h3>
         </div>
-        <div class="mode-list-bd">
+
+    <p v-if="loading" class="v-loading">加载中...</p>
+
+        <div class="mode-list-bd" v-if="loading==false" transition="show" v-cloak>
             <ul>
                 <li v-for="item in list">
                     <a class="mode-df" href="javascript:void(0)">
@@ -36,8 +38,8 @@
                         <!--</button>-->
 
                         <div class="mode-inner">
-                            <p v-cloak>{{item.title}}</p>
-                            <span class="single-time" v-cloak>{{item.sec}}</span>
+                            <p v-text="item.title"></p>
+                            <span class="single-time" v-text="item.sec"></span>
                         </div>
                         <div class="mode-control">
                             <button class="plus-btn" type="button" @click="download(item)">
@@ -52,6 +54,7 @@
             </ul>
         </div>
     </section>
+        <input type="text" id="select" style="display:none">
 </div>
 
 <!--include footer-->

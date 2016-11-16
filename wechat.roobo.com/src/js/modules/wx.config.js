@@ -50,22 +50,22 @@
     var obj = setUrl.parse(pageUrl);
     var _url = location.href.split('#')[0];
     var currUrl = encodeURIComponent(_url);
-    var openUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9c5f793c4eee9683&redirect_uri="+ _url +"&response_type=code&scope=snsapi_base#wechat_redirect";
+    var openUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+window.juli.appid+"&redirect_uri="+ _url +"&response_type=code&scope=snsapi_base#wechat_redirect";
     var wxcode = setUrl.get('code', pageUrl);
+
     getSign(wxcode, _url);
 
     function getSign(_code, _dataUrl) {
 
         $.ajax({
-            url: 'http://wechat.roobo.com/storybox/roobo/getSign.do',
-            // url: 'http://localhost:8080/storybox/roobo/getSign.do',
+            url: juli.URL.getSign,
             type: 'POST',
             dataType: 'json',
             data: {
                 code: _code,
                 url: _dataUrl
             }
-        })
+            })
             .done(function (res) {
                 console.log(res);
                 if(res.error === '0'){
@@ -125,7 +125,5 @@
                 console.log("error");
             });
     }
-
-
 
 })(jQuery, window);

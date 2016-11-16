@@ -10,7 +10,7 @@
     @@include('templates/widget_header.html')
 
     <script>
-        getDeviceId(window.openId);
+        setTimeout("getDeviceId(localStorage.openId)",200)
     </script>
 </head>
 

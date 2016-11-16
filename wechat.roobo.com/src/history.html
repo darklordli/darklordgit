@@ -19,15 +19,19 @@
             <h3 class="rb-left">
                 <i class="history-icon"></i>
                 历史点播/
-                <b v-cloak>{{list.length}}</b>
+                <b v-text="list.length" v-if="list.length"></b>
             </h3>
         </div>
-        <div class="mode-list-bd">
+
+    <p v-if="loading" class="v-loading">加载中...</p>
+
+        <div class="mode-list-bd" v-if="loading==false" transition="show" v-cloak>
             <ul>
                 <li v-for="item in list">
                     <a class="mode-df" href="javascript:void(0)">
                         <!--demand-->
-                        <button class="demand-btn" type="button" v-on:click.stop.prevent="demand(item)">
+                        <button class="demand-btn" type="button"
+                        v-on:click.stop.prevent="demand(item)">
                             <i class="demand-icon"></i>
                         </button>
                         <!--stop-->
@@ -35,8 +39,8 @@
                             <i class="demand-icon"></i>
                         </button>-->
                         <div class="mode-inner">
-                            <p v-cloak>{{item.title}}</p>
-                            <span class="single-time" v-cloak>{{item.sec}}</span>
+                            <p v-text="item.title"></p>
+                            <span class="single-time" v-text="item.sec"></span>
                         </div>
                         <div class="mode-control">
                             <!--收藏-->
@@ -57,12 +61,11 @@
                         </div>
                     </a>
                 </li>
-
             </ul>
         </div>
     </section>
 </div>
-
+    <input type="text" id="select" style="display:none">
 <!--include footer-->
 @@include('templates/widget_footer.html')
 <script type='text/javascript' src='static/js/components/history.js' charset='utf-8'></script>

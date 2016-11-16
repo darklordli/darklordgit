@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" id="j_list">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="keywords" content="">
-
     <!--include head-->
     @@include('templates/widget_header.html')
-
 </head>
 <body>
 
@@ -20,20 +18,21 @@
     <section class="story-banner">
         <img :src=imghost+listdata.currentCategory.imgLarge alt="{{listdata.currentCategory.name}}">
         <div class="story-title">
-            <h3 v-cloak>{{listdata.currentCategory.name}}</h3>
-            <p v-cloak>{{listdata.currentCategory.description}}</p>
+            <h3 v-text="listdata.currentCategory.name"></h3>
+            <p v-text="listdata.currentCategory.description"></p>
         </div>
     </section>
     <section class="story-list">
         <div class="story-list-hd">
             <span v-cloak>共{{listdata.categoryList.length}}类</span>
+            <span class="copyright-list" v-show="babateng" v-cloak>Powered by roobo</span>
         </div>
         <div class="story-list-bd">
             <ul>
                 <li v-for="item in listdata.categoryList">
                     <a class="link-icon" href="#" v-on:click.stop.prevent="getdetail(item)">
                         <i v-cloak>{{$index+1}}</i>
-                        <span v-cloak>{{item.name}}</span>
+                        <span v-text="item.name"></span>
                     </a>
                 </li>
             </ul>
@@ -56,7 +55,10 @@
     <section class="story-list">
         <div class="story-list-hd clearfix">
             <span class="rb-left" v-cloak>共{{listdata.resourcePage.totalRows}}首</span>
-            <!--<button class="rb-right add-btn" type="button">添加全部</button>-->
+            <span class="copyright-list" v-show="babateng" v-cloak>Powered by roobo</span>
+            <button class="rb-right add-btn"
+            type="button"
+            v-on:click.stop.prevent="downloadlist()">添加全部</button>
         </div>
         <div class="story-list-bd single-list">
             <!--试听的audio-->
@@ -115,9 +117,7 @@
         </div>
     </section>
     </template>
-
-
-
+    <input type="text" id="select" style="display:none">
 
 </div>
 

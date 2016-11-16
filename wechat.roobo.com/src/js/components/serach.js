@@ -12,19 +12,41 @@
  * @param   {String}    名称
  * @param   {Function}  方法
  */
-     searchVM=new Vue({
-       el: '#j_search',
+    searchVM=new Vue({
+       el:"#j_search",
        data:{
          searchdata:"",
          list:"",
          input:"",
          historylist:"",
-         showsearch:""
+         showsearch:"",
+         downloaddata:"",
+         playtracklist:""
        },
        ready:function(){
          this.decide("url");
+         this.initselectdata();       //初始化selecr组件数据
+       },
+       computed:{
+         babateng:function(){
+             return DEBUG=="babateng"||DEBUG=="dev"
+           }
        },
        methods:{                                          //先根据参数判断从哪获取搜索关键词
+         initselectdata:function(){                             //初始化select组件
+            var _self = this;
+            var playtracklist=utils.gettrackList();
+
+            console.log(playtracklist);
+
+            if (playtracklist.length) {
+            $.each(playtracklist,function(i,n){
+              n.title=n.name;
+              n.value=n.id;
+            })
+            }
+            _self.playtracklist=playtracklist;
+         },
          decide:function(param){
            if (param=="url"){
              this.searchdata = utils.getparam("search");
@@ -145,45 +167,7 @@
            item.isplay=false;
          },
          demand:function(item){                      //点播-收藏-需先判断是否已经绑定设备
-
-           //如果没有绑定设备--提示并返回
-           if (!utils.getdevice()){
-             // alert("您还没有绑定设备，请去绑定设备！");
-               $.alert("您还没有绑定设备，请去绑定设备！","", function () {
-                   // 回调
-               });
-             return false;
-           }
-
-           var _self = this;
-           var json = {
-             openId: utils.openid,
-             trackId:item.id,
-             deviceId:utils.getdevice(),
-             duration:item.length,
-
-             downloadSize:item.size,
-             title:item.name,
-             albumTitle:""
-           };
-           console.log(json)
-           $.ajax({
-              url: juli.URL.play+"?mediaId=",
-               type : "POST",
-               contentType : 'application/json',
-               async : false,
-               //dataType : 'json',
-               timeout : 4000,
-               data : JSON.stringify(json),
-               success:function(msg) {
-                  if (msg=="ok"){
-                    $.toast("点播成功，请点击故事机上的播放按钮", "text");
-                  }
-                  else {
-                    $.toast("点播失败提示", "text");
-                  }
-                 }
-             });
+           utils.demand(item.id,item.content);
          },
          addfav: function (item) {               //添加收藏--需先判断是否已经绑定设备
 
@@ -237,13 +221,15 @@
              })
          },
          download: function (item) {               //下载
+           var _self = this;
+
            if(!utils.getdevice()){
              $.alert("您还没有绑定设备，请去绑定设备！","", function () {
                // 回调
              });
              return false;
            }
-           var _self = this;
+
            var json = [{
              title: item.name,
              id:item.id,
@@ -252,21 +238,44 @@
              downloadUrl: item.content,
              downloadSize: item.size
            }];
-           console.log(json);
+
+           _self.downloaddata=json;
+
+           $("#select").select({
+             title: "请选择播放列表",
+             items:_self.playtracklist,
+             closeText:"取消",
+             onChange:function(){
+               //传（名，值）
+               _self.downloadfun($("#select").val(),$("#select").data('values'));
+             }
+           });
+
+           //调用打开select，开始选择，并拿到值
+            $("#select").select("open");
+         },
+
+         downloadfun: function (name,val) {               //下载--需先判断是否已经绑定设备
+           var _self = this;
+           console.log(name)
+           console.log(val)
            $.ajax({
-             url: juli.URL.download+"?deviceId="+utils.getdevice()+"&id="+utils.trackListId()+"&name="+encodeURI(encodeURI(utils.tracklist)),
-             type: 'post',
+             url: juli.URL.download+"?deviceId="+utils.getdevice()+"&id="+val+"&name="+encodeURI(encodeURI(name)),
+             type : 'post',
+             async: false,
              contentType: 'application/json',
-             data: JSON.stringify(json)
+             data: JSON.stringify(_self.downloaddata)
            })
            .done(function (res) {
               console.log(res);
-              // alert("添加成功！");
-               $.toast("添加成功", "text");
+               $.toast("添加成功！", "text");
+               //清除select状态
+              utils.clearselect();
             });
          },
+
          href:function(item){
            location.href="single.html?id="+item.id;
-         },
+         }
        }
    })

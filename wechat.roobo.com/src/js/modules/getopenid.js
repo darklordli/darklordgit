@@ -46,16 +46,17 @@
 
     var pageUrl = window.location.href;
     var _url = location.href.split('#')[0];
-    var openUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9c5f793c4eee9683&redirect_uri="+ _url +"&response_type=code&scope=snsapi_base#wechat_redirect";
-    var codeidUrl = 'http://wechat.roobo.com/storybox/roobo/getOpenId.do';
-    // var codeidUrl = 'http://localhost:8080/storybox/roobo/getOpenId.do';
+    var openUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+window.juli.appid+"&redirect_uri="+ _url +"&response_type=code&scope=snsapi_base#wechat_redirect";
+
     var wxcode = setUrl.get('code', pageUrl);
     window.openId = '';
     window.deviceId = '';
 
-    getOpenId(codeidUrl, wxcode);
+    if(localStorage.getItem('openId') === ''|| localStorage.getItem('openId') === null){
+            getOpenId(juli.URL.codeid, wxcode);
+    }
 
-    function  getOpenId(_ajaxUrl, _code) {
+    function getOpenId(_ajaxUrl, _code) {
         $.ajax({
             url: _ajaxUrl,
             type: 'GET',
@@ -67,6 +68,7 @@
         })
             .done(function (res) {
                 console.log(res);
+                debugger;
                 if(res.error === '0'){
                     window.location.href = openUrl;
                 }else {
@@ -88,8 +90,7 @@
 
     window.getDeviceId=function getDeviceId(opid) {
         $.ajax({
-            url: 'http://wechat.roobo.com/storybox/familymember/getdeviceid.do',
-            // url: 'http://localhost:8080/storybox/familymember/getdeviceid.do',
+            url: juli.URL.getdevice ,
             type: 'GET',
             dataType: 'html',
             async: false,

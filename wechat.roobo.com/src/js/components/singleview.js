@@ -37,6 +37,7 @@
    console.log(trackListId)
    console.log(trackId)
    console.log(type)
+   singleview.loading=false;
    if (trackId=="-1"){
      singleview.title="当前无正在播放歌曲~";
    }
@@ -52,10 +53,10 @@
    console.log(mode);
    if(mode == "repeat all"){
      _self.isloop=true
-      $.toast("当前循环模式为:全部循环~", "text");
+      //$.toast("当前循环模式为:全部循环~", "text");
    }else{
      _self.isloop=false
-      $.toast("当前循环模式为:单曲循环~", "text");
+      //$.toast("当前循环模式为:单曲循环~", "text");
    }
  }
 
@@ -79,6 +80,7 @@
      this.getdeviceinfo();
    },
    data:{
+     loading:true,
      isplayed:false,                                                  //已经在播放的标记，如果为true，则播放键变为resume()
      currentdata:"",                                                  //当前资源的数据
      islike:"",
@@ -88,6 +90,11 @@
      sec:"",                                                         //转为分秒
      title:"",                                                       //存储标题
      deviceOnline:true
+   },
+   computed:{
+     babateng:function(){
+       return DEBUG=="babateng"||DEBUG=="dev"
+     }
    },
    methods:{
      getdevice:function(){                                    //获取deviceId
@@ -127,6 +134,7 @@
 
        })
      },
+
      play: function () {                      //播放--首先要判断故事机是否在线
          var _self = this;
 
@@ -151,7 +159,7 @@
          .done(function(res){
            console.log(res)
            var trackId =parseInt(utils.getparam("id"));
-           var trackListId =utils.trackListId();
+           var trackListId = utils.trackListId();
            var url = res.content;
            var downloadUrl = res.content;
            playTrack(trackListId,trackId,url,downloadUrl);
@@ -159,6 +167,7 @@
            _self.isplayed=true;
          })
      },
+
      pause:function(){                        //暂停-儿童馆
          var _self = this;
        //如果故事机不在线--则提示并返回
@@ -171,6 +180,19 @@
         pauseTrack();
         this.isplay=false;
      },
+
+     resume:function(){                       //恢复播放
+       var _self = this;
+     //如果故事机不在线--则提示并返回
+        if (!_self.deviceOnline){
+           // alert("故事机不在线！");
+            $.toast("故事机不在线", "text");
+           return false;
+         }
+      resumeTrack();
+      this.isplay=false;
+      },
+
      repeatone:function(){                    //发单曲循环消息
          var _self = this;
        //如果故事机不在线--则提示并返回

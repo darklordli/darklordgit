@@ -3,20 +3,60 @@
  * @author: libaojun@roo.bo
  * @version: V2
  * @update: 16/4/19
- */
+ **/
 
 /**
- *
- * @name    util.js
- * @param   {String}    名称
- * @param   {Function}  方法
- */
+utils.js 通用工具方法js里的方法列表
 
-    var utils = {
+1 获取openId
+
+2 根据deviceId 拿到播放列表ID 数组 首个
+
+3 创建播放列表 无返回
+
+4 获取deviceID
+
+5 点播的通用方法
+
+6 播放通用方法
+
+7 获取url参数
+
+8 时间戳格式化为分秒
+
+9 获取设备在线状态
+
+10 使故事机同步播放列表
+
+11 IOS设置标题
+
+12 清除select的值  名
+
+13 是否是巴巴腾环境
+*/
+
+  var utils = {
       pagesize:10,
       //openid:"oTv0AxBDYyBEPLWBm9sfX9Uml6J8",            //openid
-      openid:window.openId,                           //openid
+      openid:localStorage.openId,
       tracklist:"播放列表",
+      gettrackList:function(){                          //拿到设备播放列表，return设备播放列表数据
+        var playtracklist;
+        $.ajax({
+            url :juli.URL.getplaytracklist,
+            type:'get',
+            async:false,
+            cache:false,
+            data:{
+              deviceId:utils.getdevice()
+            }
+        })
+        .done(function(res){
+          console.log(res);
+          playtracklist =res;
+          })
+          return playtracklist
+      },
       trackListId:function(){                           //拿到播放列表ID
         var trackListId;
         $.ajax({
@@ -29,17 +69,13 @@
             }
         })
         .done(function(res){
-          console.log(res);
-          //如果查到有播放列表，则返回播放列表，没有则先创建列表，然后递归拿一次播放列表
-          if (!res.length){
-            utils.createtrackList();
-            utils.trackListId();
-          }
+          console.log(res)
           trackListId = res[0].id;
+          console.log(trackListId)
           })
           return trackListId;
       },
-      createtrackList:function(){                        //
+      createtrackList:function(){                        //创建播放列表
         var newjson = {
           id:0,
           deviceId: utils.getdevice(),
@@ -58,11 +94,9 @@
         });
       },
       getdevice:function(){                            //获取deviceid
-          var deviceid;
-          var openId=utils.openid;
-          // if(!openId){
-          //     getOpenId();
-          // }
+        var deviceid;
+        var openId=utils.openid;
+
         $.ajax({
             url :juli.URL.getdevice,
             type:'get',
@@ -79,6 +113,44 @@
           })
           return deviceid;
         },
+      demand:function(trackId,url){               //点播的通用方法
+        //如果没有绑定设备--提示并返回
+        if (!utils.getdevice()){
+          $.alert("您还没有绑定设备，请去绑定设备！","", function () {
+       // 回调
+          });
+          return false;
+        }
+        //如果故事机不在线--则提示并返回
+       if (!utils.online()){
+          // alert("故事机不在线！");
+           $.toast("故事机不在线", "text");
+          return false;
+        }
+
+        var json = {
+          openId: utils.openid,
+          trackId:trackId,
+          url:url
+        };
+        $.ajax({
+           url: juli.URL.demand+"?mediaId=",
+            type : "POST",
+            contentType : 'application/json',
+            async : false,
+            //dataType : 'json',
+            timeout : 4000,
+            data : JSON.stringify(json),
+            success:function(msg) {
+               if (msg=="0"){
+                 $.toast("点播成功！", "text");
+               }
+               else {
+                 $.toast("点播失败", "text");
+               }
+              }
+          });
+      },
       play:function(trackId){                            //播放通用方法
         var playJson = {
           openId: utils.openid,
@@ -106,7 +178,7 @@
         else
           return decodeURIComponent(results[1].replace(/\+/g, " "));
       },
-      formatSeconds : function(value){
+      formatSeconds : function(value){          //时间戳格式化
         var theTime = parseInt(value);// 秒
         var theTime1 = 0;// 分
         var theTime2 = 0;// 小时
@@ -154,5 +226,8 @@
              }, 0);
            }).appendTo($body);
         },
-
+      clearselect:function(){                           //清除select的值  名
+          $("#select").val("");
+          $("#select").data('values', '');
+        }
       };

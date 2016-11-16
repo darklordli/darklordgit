@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="j_list">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--include head-->
+    @@include('templates/widget_header.html')
+
+</head>
+<body>
+
+<!--wrap-->
+<div id="wrap">
+
+
+  <!--如果是子目录-->
+  <template v-if="listdata.categoryList.length">
+    <section class="story-banner">
+        <img :src=imghost+listdata.currentCategory.imgLarge alt="{{listdata.currentCategory.name}}">
+        <div class="story-title">
+            <h3 v-text="listdata.currentCategory.name"></h3>
+            <p v-text="listdata.currentCategory.description"></p>
+        </div>
+    </section>
+    <section class="story-list">
+        <div class="story-list-hd">
+            <span v-cloak>共{{listdata.categoryList.length}}类</span>
+        </div>
+        <div class="story-list-bd">
+            <ul>
+                <li v-for="item in listdata.categoryList">
+                    <a class="link-icon" href="#" v-on:click.stop.prevent="getdetail(item)">
+                        <i v-cloak>{{$index+1}}</i>
+                        <span v-text="item.name"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+  </template>
+    <!--如果是子目录-->
+
+
+
+    <!--如果是资源列表-->
+    <template v-if="listdata.resourcePage.totalRows">
+    <section class="story-banner">
+        <img :src=imghost+listdata.currentCategory.imgLarge alt="{{listdata.currentCategory.name}}">
+        <div class="story-title">
+            <h3 v-cloak>{{listdata.currentCategory.name}}</h3>
+            <p v-cloak>{{listdata.currentCategory.description}}</p>
+        </div>
+    </section>
+    <section class="story-list">
+        <div class="story-list-hd clearfix">
+            <span class="rb-left" v-cloak>共{{listdata.resourcePage.totalRows}}首</span>
+            <button class="rb-right add-btn" type="button" v-on:click.stop.prevent="downloadlist()">添加全部</button>
+        </div>
+        <div class="story-list-bd single-list">
+            <!--试听的audio-->
+            <audio src="" id="try" style="display:none"></audio>
+
+            <ul>
+                <template v-for="item in listdata.resourcePage.result">
+                    <li>
+                        <div class="single-item" v-on:click.stop.prevent="toggleopen(item)">
+                            <!-- play -->
+                            <button class="demand-btn" type="button" v-on:click.stop.prevent="demand(item)">
+                                <i class="demand-icon"></i>
+                            </button>
+
+                            <div class="single-infor">
+                                <p v-cloak>{{item.name}}</p>
+                                <span class="single-time" v-cloak>{{item.sec}}</span>
+                            </div>
+                            <a class="download-btn" href="javascript:;" v-on:click.stop.prevent="download(item)">
+                                <i class="add-icon"></i>
+                            </a>
+                        </div>
+
+                        <div class="operate-icon" transition="expand" v-show="item.isexpand">
+                            <a href="javascript:;" v-show="!item.isplay"
+                            v-on:click.stop.prevent="try(item)">
+                                <i class="audition-icon"></i>
+                                试听
+                            </a>
+
+                            <a class="active" href="javascript:;" v-show="item.isplay"
+                            v-on:click.stop.prevent="stoptry(item)">
+                                <i class="audition-icon"></i>
+                                停止
+                            </a>
+
+                            <a href="javascript:;" v-show="!item.islike" v-on:click.stop.prevent="addfav(item)">
+                                <i class="like-icon"></i>
+                                收藏
+                            </a>
+                            <a class="active" href="javascript:;" v-show="item.islike" v-on:click.stop.prevent="dellike(item)">
+                                <i class="like-icon"></i>
+                                取消收藏
+                            </a>
+                            <a href="single.html?id={{item.id}}">
+                                <i class="detail-icon"></i>
+                                详情
+                            </a>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+            <div class="loading-more">
+                <a href="javascript:;" v-on:click.stop.prevent="nextpage()" v-if="haspage">加载更多</a>
+            </div>
+        </div>
+    </section>
+    </template>
+
+
+
+
+</div>
+
+<!--include footer-->
+@@include('templates/widget_footer.html')
+<script type='text/javascript' src='static/js/components/list.js' charset='utf-8'></script>
+
+<!--include 统计-->
+@@include('templates/widget-statistics.html')
+
+</body>
+</html>

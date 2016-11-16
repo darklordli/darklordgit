@@ -2,12 +2,13 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>提示页</title>
+    <title>绑定设备</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
+    <!--include head-->
     <!--include header base-->
-    <meta name="author" content="Roobo:F2E">
+<meta name="author" content="Roobo:F2E">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -31,15 +32,21 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
 <link rel="stylesheet" href="static/css/weui-a747b2c97e.min.css">
-<link rel="stylesheet" href="static/css/jquery-weui-bd189cf432.css">
-<link rel="stylesheet" href="static/css/app-caa46d4391.css">
+<link rel="stylesheet" href="static/css/jquery-weui-b76c9e6ade.css">
+<link rel="stylesheet" href="static/css/app-8d9c2e7f2b.css">
 <script src="static/js/components/pxtorem-4e4ea649b7.js"></script>
 
 <!--<script type='text/javascript' src='static/js/lib/1.11.3/jquery-835146b2f7.js' charset='utf-8'></script>-->
 <!--<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
 
-<script type='text/javascript' src='static/js/config/juli_config-9cca9a9cfd.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/config/juli_config-079eaa7cf6.js' charset='utf-8'></script>
+<style>[v-cloak] {display: none!important}</style>
+
+
+<script src="static/js/modules/getopenid-3d97e9f34d.js"></script>
+<script type='text/javascript' src='static/js/util/utils-3643d49506.js' charset='utf-8'></script>
+
 
 </head>
 
@@ -49,24 +56,35 @@
     <section class="setting-wifi">
         <p>设备绑定流程</p>
         <ul>
-            <li><b>1</b><p>扫描故事机底部二维码</p></li>
+            <li><b>1</b><p>扫描<span class="name"></span>底部二维码</p></li>
             <li><b>2</b><p>进入公众号，点击绑定设备</p></li>
         </ul>
-        <p>注：如已绑定一台故事机，则再次绑定其他故事机时，会解绑之前绑定的故事机。</p>
+        <p>注：如已绑定一台<span class="name"></span>，
+          则再次绑定其他<span class="name"></span>时，
+          会解绑之前绑定的<span class="name"></span>。</p>
     </section>
     <div class="binding-tip">
         <button type="button" class="J-scan">扫描二维码</button>
     </div>
 </div>
 
+<script src="static/js/lib/1.11.3/jquery-835146b2f7.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="static/js/modules/wx-b60e04b064.config.js"></script>
-<script src="static/js/components/scan-5e414076ac.js"></script>
-
+<script src="static/js/config/juli_config-079eaa7cf6.js"></script>
+<!-- <script src="static/js/modules/wx-ed24beff0c.config.js"></script> -->
+<script src="static/js/components/scan-b8a34b07ce.js"></script>
 
 <script>
-
     (function () {
+
+      //根据配置判断文字
+      if(DEBUG=="babateng"||DEBUG=="dev"){
+        $(".name").text('阿零');
+      }
+      else{
+          $(".name").text('故事机');
+      }
+
         var agent = navigator.userAgent.toLowerCase();        //检测是否是ios
         var iLastTouch = null;                                //缓存上一次tap的时间
         if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0) {

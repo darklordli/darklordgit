@@ -13,9 +13,22 @@
  */
 
  codeVM=new Vue({
-   el: '#j_code',
+   el: "html",
    data:{
      src:""
+   },
+   computed:{
+    babateng:function(){
+         return DEBUG=="babateng"||DEBUG=="dev"
+      },
+    tip:function(){
+      if(this.babateng){
+        return "扫描二维码加入阿零家庭圈"
+      }
+      else{
+        return "扫描二维码加入智能故事机微信家庭群"
+      }
+    }
    },
    ready:function(){
      this.getdata();
@@ -25,7 +38,7 @@
        var _self=this;
        $.ajax({
            url:juli.URL.getcode+"?deviceId="+utils.getdevice(),
-           type: 'get',
+           type: "get",
            cache:false
        })
        .done(function(res){

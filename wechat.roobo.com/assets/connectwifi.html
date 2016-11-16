@@ -32,22 +32,24 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
 <link rel="stylesheet" href="static/css/weui-a747b2c97e.min.css">
-<link rel="stylesheet" href="static/css/jquery-weui-bd189cf432.css">
-<link rel="stylesheet" href="static/css/app-caa46d4391.css">
+<link rel="stylesheet" href="static/css/jquery-weui-b76c9e6ade.css">
+<link rel="stylesheet" href="static/css/app-8d9c2e7f2b.css">
 <script src="static/js/components/pxtorem-4e4ea649b7.js"></script>
 
 <!--<script type='text/javascript' src='static/js/lib/1.11.3/jquery-835146b2f7.js' charset='utf-8'></script>-->
 <!--<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
 
-<script type='text/javascript' src='static/js/config/juli_config-9cca9a9cfd.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/config/juli_config-079eaa7cf6.js' charset='utf-8'></script>
+<style>[v-cloak] {display: none!important}</style>
 
-<script src="static/js/modules/getopenid-1bf4b910cd.js"></script>
-<script type='text/javascript' src='static/js/util/utils-a46f9bf22f.js' charset='utf-8'></script>
+
+<script src="static/js/modules/getopenid-3d97e9f34d.js"></script>
+<script type='text/javascript' src='static/js/util/utils-3643d49506.js' charset='utf-8'></script>
 
 
     <script>
-        getDeviceId(window.openId);
+        setTimeout("getDeviceId(localStorage.openId)",200)
     </script>
 </head>
 
@@ -56,7 +58,7 @@
 
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="static/js/modules/wx-b60e04b064.config.js"></script>
+<script src="static/js/modules/wx-ed24beff0c.config.js"></script>
 <script src="static/js/components/wxwifi-021e94ca67.js"></script>
 
 <!--include 统计-->

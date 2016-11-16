@@ -1,6 +1,7 @@
 var clientId = new Date().getTime().toString();
-var client = new Paho.MQTT.Client("storybox.mqtt.roobo.com", 8083, clientId);
-//var client = new Paho.MQTT.Client("58.254.217.112", 9001, clientId);
+
+var client = new Paho.MQTT.Client(window.juli.MQTT,window.juli.MQTTPORT, clientId);
+
 	// set callback handlers
 client.onConnectionLost = onConnectionLost;
 
@@ -87,6 +88,7 @@ function clientPublish(obj){
 		 	//alert(topic);
 		 	message.destinationName = topic;
 		 	try{
+				console.log()
 		 		client.send(message);
 		 	}
 		 	catch(error){
@@ -148,6 +150,10 @@ function onMessageArrived(message){
 			console.log("------------------------------------");
 			if(playSinVoiceUrl)
 				playSinVoiceUrl(obj.playSinVoiceUrl,obj.openId);
+		}
+		else if(obj.hasOwnProperty("cmd") && obj.hasOwnProperty("trackListId") && obj.hasOwnProperty("trackIds")){
+					if(obj.cmd == "initialTrackList" && startInitialTrackList)
+						startInitialTrackList(obj.trackListId,obj.trackIds);
 		}
 	}
 	catch(e){
@@ -245,5 +251,18 @@ function getBoxInfo(){
 //升级指令
 function boxUpgrade(versionName,firmwareUrl){
 	var cmdObj = {cmd:"upgrade",versionName:versionName,firmwareUrl:firmwareUrl};
+	clientPublish(cmdObj);
+}
+
+//询问设备初始列表内容
+function getInitialTrackList(trackListId){
+	trackListId=parseInt(trackListId);
+	var cmdObj = {cmd:"getInitialTrackList",trackListId:trackListId};
+	clientPublish(cmdObj);
+}
+
+//播放一个trackId的数组，不含url
+function playTracks(trackIds){
+	var cmdObj = {cmd:"playTracks",trackIds:trackIds};
 	clientPublish(cmdObj);
 }

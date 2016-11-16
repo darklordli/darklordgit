@@ -8,15 +8,18 @@
 
     <!--include head-->
     @@include('templates/widget_header.html')
-
 </head>
 <body id="uc">
 
 <!--wrap-->
 <div id="wrap">
-    <section class="family-box">
+
+    <p v-if="loading" class="v-loading">加载中...</p>
+
+    <section v-if="loading==false" class="family-box">
+
       <!--如果是管理员-->
-        <ul v-if="isadmin">
+        <ul v-if="isadmin" transition="show" v-cloak>
             <li v-for="item in members" v-on:click.stop.prevent="quitbyadmin(item)">
                 <div class="user-avatar">
                     <div class="inner-avatar">
@@ -24,9 +27,7 @@
                         <span class="me" v-if="item.self">我</span>
                     </div>
                 </div>
-                <div class="avatar-name" v-cloak>
-                    {{item.nickname}}
-                </div>
+                <div class="avatar-name" v-text="item.nickname"></div>
                 <div class="user-permission">
                     <button type="button" v-if="item.admin">管理员</button>
                 </div>
@@ -42,7 +43,7 @@
         </ul>
       <!--/如果是管理员-->
       <!--如果不是管理员-->
-        <ul v-else>
+        <ul v-else transition="show" v-cloak>
             <li v-for="item in members" v-on:click.stop.prevent="quit(item)">
                 <div class="user-avatar">
                     <div class="inner-avatar">
@@ -50,9 +51,7 @@
                         <span class="me" v-if="item.self">我</span>
                     </div>
                 </div>
-                <div class="avatar-name" v-cloak>
-                    {{item.nickname}}
-                </div>
+                <div class="avatar-name" v-text="item.nickname"></div>
                 <div class="user-permission">
                     <button type="button" v-if="item.admin">管理员</button>
                 </div>
@@ -68,7 +67,6 @@
         </ul>
       <!--/如果不是管理员-->
     </section>
-
 </div>
 
 

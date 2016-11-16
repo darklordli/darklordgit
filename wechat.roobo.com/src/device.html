@@ -12,37 +12,40 @@
 </head>
 <body id="uc">
 
-<!--wrap-->
-<div id="wrap">
-    <section class="device-list">
-        <ul>
-            <li class="clearfix">
-                <strong class="rb-left">设备号</strong>
-                <span class="rb-right" v-cloak>{{info.id}}</span>
-            </li>
-            <li class="clearfix">
-                <strong class="rb-left">连接网络</strong>
-                <span class="rb-right" v-cloak>{{info.net}}</span>
-            </li>
-            <li class="clearfix">
-                <strong class="rb-left">存储空间</strong>
-                <span class="rb-right" v-cloak>{{info.cardAvailable}}{{info.cardTotal}}</span>
-            </li>
-            <li class="clearfix">
-                <strong class="rb-left">电量</strong>
-                <span class="rb-right" v-cloak>{{info.electricity}}</span>
-            </li>
-            <li class="clearfix">
-                <strong class="rb-left">固件版本</strong>
-                <span class="rb-right" v-cloak>{{info.firmwareVersion}}</span>
-            </li>
-            <li>
-                <a href="" class="weui_btn weui_btn_primary" v-if="isupdate" v-on:click.stop.prevent="update()">版本升级</a>
-            </li>
-
-        </ul>
-    </section>
-</div>
+  <!--wrap-->
+  <div id="wrap">
+      <section class="device-list">
+          <ul>
+              <li class="clearfix">
+                  <strong class="rb-left">设备号</strong>
+                  <span class="rb-right" v-text="info.id"></span>
+              </li>
+              <li class="clearfix" v-if="isonline">
+                  <strong class="rb-left">连接网络</strong>
+                  <span class="rb-right" v-text="info.net"></span>
+              </li>
+              <li class="clearfix">
+                  <strong class="rb-left">音频数量</strong>
+                  <span class="rb-right" v-text="num"></span>
+              </li>
+              <li class="clearfix">
+                  <strong class="rb-left">存储空间</strong>
+                  <span class="rb-right" v-cloak>{{info.cardAvailable}}{{info.cardTotal}}</span>
+              </li>
+              <li class="clearfix" v-if="isonline">
+                  <strong class="rb-left">电量</strong>
+                  <span class="rb-right" v-text="info.electricity"></span>
+              </li>
+              <li class="clearfix">
+                  <strong class="rb-left">固件版本</strong>
+                  <span class="rb-right" v-text="info.firmwareVersion"></span>
+              </li>
+              <li v-if="canupdate&&newversion" v-cloak>
+                  <a href="javascript:void(0)" class="ui-btn" v-on:click.stop.prevent="update()">版本升级</a>
+              </li>
+          </ul>
+      </section>
+  </div>
 
 
 <!--include footer-->

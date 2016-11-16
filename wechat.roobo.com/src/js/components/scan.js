@@ -1,5 +1,6 @@
 /**
  * Created by lixinwei on 16/8/4.
+  update by libaojun 2016/11/11
  */
 
 
@@ -43,11 +44,6 @@
         init: function () {
             var _that = this;
             _that.bindEvent();
-            
         }
     };
-
-
-
-
 })(jQuery, window);

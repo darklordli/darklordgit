@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>提示页</title>
+    <title>绑定设备</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!--include header base-->
-    @@include('templates/widget-header-base.html')
+    <!--include head-->
+    @@include('templates/widget_header.html')
 
 </head>
 
@@ -17,24 +17,35 @@
     <section class="setting-wifi">
         <p>设备绑定流程</p>
         <ul>
-            <li><b>1</b><p>扫描故事机底部二维码</p></li>
+            <li><b>1</b><p>扫描<span class="name"></span>底部二维码</p></li>
             <li><b>2</b><p>进入公众号，点击绑定设备</p></li>
         </ul>
-        <p>注：如已绑定一台故事机，则再次绑定其他故事机时，会解绑之前绑定的故事机。</p>
+        <p>注：如已绑定一台<span class="name"></span>，
+          则再次绑定其他<span class="name"></span>时，
+          会解绑之前绑定的<span class="name"></span>。</p>
     </section>
     <div class="binding-tip">
         <button type="button" class="J-scan">扫描二维码</button>
     </div>
 </div>
 
+<script src="static/js/lib/1.11.3/jquery.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="static/js/modules/wx.config.js"></script>
+<script src="static/js/config/juli_config.js"></script>
+<!-- <script src="static/js/modules/wx.config.js"></script> -->
 <script src="static/js/components/scan.js"></script>
 
-
 <script>
-
     (function () {
+
+      //根据配置判断文字
+      if(DEBUG=="babateng"||DEBUG=="dev"){
+        $(".name").text('阿零');
+      }
+      else{
+          $(".name").text('故事机');
+      }
+
         var agent = navigator.userAgent.toLowerCase();        //检测是否是ios
         var iLastTouch = null;                                //缓存上一次tap的时间
         if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0) {

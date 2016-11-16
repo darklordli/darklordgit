@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>配置网络</title>
+    <meta name="author" content="Roobo:F2E">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+<body>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+
+/**
+ * @description: 配网工具页面
+ * @author: 李宝君
+ * @version: V1
+ * @update: 16/10/21
+ */
+
+!(function ($, win, undefined) {
+
+
+    var _url = location.href.split('#')[0];
+    var currUrl = encodeURIComponent(_url);
+    var ajaxUrl = "http://dev.storybox.roobo.com/wechat/web/wx/sign";
+
+    console.log(currUrl);
+
+    $.ajax({
+            url: ajaxUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: {url: currUrl}
+        })
+        .done(function (res) {
+            console.log(res);
+            wx.config({
+                beta: true,
+                debug: true,
+                appId: 'wx35b18e1c06397650',
+                timestamp: Number(res.timestamp),
+                nonceStr: res.nonceStr,
+                signature: res.signature,
+                jsApiList: [
+                  'checkJsApi',
+                  'onMenuShareTimeline',
+                  'onMenuShareAppMessage',
+                  'onMenuShareQQ',
+                  'onMenuShareWeibo',
+                  'onMenuShareQZone',
+                  'hideMenuItems',
+                  'showMenuItems',
+                  'hideAllNonBaseMenuItem',
+                  'showAllNonBaseMenuItem',
+                  'translateVoice',
+                  'startRecord',
+                  'stopRecord',
+                  'onVoiceRecordEnd',
+                  'playVoice',
+                  'onVoicePlayEnd',
+                  'pauseVoice',
+                  'stopVoice',
+                  'uploadVoice',
+                  'downloadVoice',
+                  'chooseImage',
+                  'previewImage',
+                  'uploadImage',
+                  'downloadImage',
+                  'getNetworkType',
+                  'openLocation',
+                  'getLocation',
+                  'hideOptionMenu',
+                  'showOptionMenu',
+                  'closeWindow',
+                  'scanQRCode',
+                  'chooseWXPay',
+                  'openProductSpecificView',
+                  'addCard',
+                  'chooseCard',
+                  'openCard',
+
+                  'configWXDeviceWiFi'
+                ]
+            });
+        })
+        .fail(function () {
+            console.log("ajaxError");
+        })
+        .always(function () {
+            //console.log("complete");
+        });
+
+
+})(jQuery, window);
+
+wx.ready(function () {
+  wx.invoke('configWXDeviceWiFi', {}, function(res) {
+      wx.closeWindow();
+  });
+
+});
+
+wx.error(function (res) {
+    JSON.stringify(res);
+    alert(res.errMsg)
+});
+</script>
+</body>
+</html>

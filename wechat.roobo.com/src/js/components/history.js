@@ -15,13 +15,32 @@
 historyvm = new Vue({
   el: '#j_history',
   data: {
-    list: ""
+    loading:true,
+    list: "",
+    downloaddata:"",
+    playtracklist:""
   },
   ready: function () {
     this.getdata();
+    this.initselectdata();       //初始化selecr组件数据
   },
   methods: {
+    initselectdata:function(){                             //初始化select组件
+       var _self = this;
+       var playtracklist=utils.gettrackList();
+
+       console.log(playtracklist);
+
+       if (playtracklist.length) {
+       $.each(playtracklist,function(i,n){
+         n.title=n.name;
+         n.value=n.id;
+       })
+       }
+       _self.playtracklist=playtracklist;
+    },
     getdata: function () {
+      var _self = this;
       $.ajax({
         url: juli.URL.gethistory,
         type: 'get',
@@ -38,41 +57,50 @@ historyvm = new Vue({
             n.isplay=false;
 			      n.islike=false;
           })
-          historyvm.list=res;
-
+          _self.list=res;
+         _self.loading=false;
         })
     },
-    demand:function(item){                      //点播-儿童馆
-      //点播开始的时候先把所有元素的播放状态去掉
+    demand:function(item){                      //收藏列表-我的
       var _self = this;
-      $.each(_self.list,function(i,n){
-          n.isplay=false;
+
+       //如果故事机不在线--则提示并返回
+      if (!utils.online()){
+          $.toast("故事机不在线", "text");
+         return false;
+       }
+
+      var json = {
+         openId: utils.openid,
+         trackId:item.trackId
+       };
+      $.ajax({
+          url:juli.URL.getsingle+"/"+item.trackId,
+          type: 'get',
+          dataType: 'json',
+          cache:false,
+          async:false,
       })
-         var json = {
-           openId: utils.openid,
-           trackId:item.trackId
-         };
-         $.ajax({
-            url: juli.URL.play+"?mediaId=",
-             type : "POST",
-             contentType : 'application/json',
-             async : false,
-             //dataType : 'json',
-             timeout : 4000,
-             data : JSON.stringify(json),
-             success:function(msg) {
-                if (msg=="ok"){
-                    // alert("点播成功");
-                    $.toast("点播成功，请点击故事机上的播放按钮", "text");
-                    //item.isplay=true;
-                    //_self.$set("item.isplay",true)
-                }
-                else {
-                  // alert("点播失败提示");
-                    $.toast("点播失败提示", "text");
-                }
-               }
-           });
+      .done(function(res){
+        json.url=res.content
+      })
+      $.ajax({
+         url: juli.URL.demand+"?mediaId=",
+          type : "POST",
+          contentType : 'application/json',
+          async : false,
+          //dataType : 'json',
+          timeout : 4000,
+          data : JSON.stringify(json),
+          success:function(msg) {
+             if (msg=="0"){
+               $.toast("点播成功！", "text");
+             }
+             else {
+               $.toast("点播失败", "text");
+             }
+            }
+        });
     },
     /*pause:function(item){                        //暂停
       var _self = this;
@@ -124,13 +152,13 @@ historyvm = new Vue({
         })
         .done(function(res){
           console.log(res);
-          // alert("删除收藏");
             $.toast("删除收藏", "text");
           item.islike=false;
         })
     },
-    download: function (item) {               //下载
+    download: function (item) {              //下载
       var _self = this;
+
       var json = [{
         title: item.title,
         id:item.trackId,
@@ -141,17 +169,38 @@ historyvm = new Vue({
         downloadUrl: item.downloadUrl,
         downloadSize: item.downloadSize
       }];
-      console.log(json);
+
+       _self.downloaddata=json;
+
+      $("#select").select({
+        title: "请选择播放列表",
+        items:_self.playtracklist,
+        closeText:"取消",
+        onChange:function(){
+          //传（名，值）
+          _self.downloadfun($("#select").val(),$("#select").data('values'));
+        }
+      });
+
+      //调用打开select，开始选择，并拿到值
+       $("#select").select("open");
+    },
+    downloadfun: function (name,val) {               //下载--需先判断是否已经绑定设备
+      var _self = this;
+      console.log(name)
+      console.log(val)
       $.ajax({
-        url: juli.URL.download+"?deviceId="+utils.getdevice()+"&id="+utils.trackListId()+"&name="+encodeURI(encodeURI(utils.tracklist)),
+        url: juli.URL.download+"?deviceId="+utils.getdevice()+"&id="+val+"&name="+encodeURI(encodeURI(name)),
         type: 'post',
+        async:false,
         contentType: 'application/json',
-        data: JSON.stringify(json)
+        data: JSON.stringify(_self.downloaddata)
       })
       .done(function (res) {
          console.log(res);
-         // alert("添加成功！");
           $.toast("添加成功！", "text");
+          //清除select状态
+        utils.clearselect();
        });
     },
     del: function (item) {                   //删除历史

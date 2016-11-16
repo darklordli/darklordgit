@@ -12,17 +12,32 @@
  * @param   {Function}  方法
  */
  listvm=new Vue({
-   el: '#j_index',
+   el: 'html',
    data:{
+     loading:true,
      list:"",
      input:"",
      imghost:"http://dwn.roo.bo/appimg/"
+   },
+   computed:{
+     babateng:function(){
+         return DEBUG=="babateng"||DEBUG=="dev"
+       },
+    title:function(){
+      if(this.babateng){
+        return "故事云"
+      }
+      else{
+        return "儿童馆"
+      }
+    }
    },
    ready:function(){
      this.getdata();
    },
    methods:{
      getdata:function(){                          //获取数据
+       var _self = this;
        $.ajax({
            url :juli.URL.cate,
            type:'get',
@@ -30,7 +45,7 @@
            cache:false
        })
        .done(function(res){
-         console.log(res);
+         _self.loading=false;
          listvm.list=res;
          })
        },

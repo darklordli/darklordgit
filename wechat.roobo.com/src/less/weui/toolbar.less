@@ -2,13 +2,13 @@
   position: relative;
   width: 100%;
   .hairline(top, #d9d9d9);
-  font-size: .85rem;
+  .font-dpr(17px);
   line-height: 1.5;
   color: #3d4145;
   background: #f7f7f8;
 
   .toolbar-inner {
-    height: 2.2rem;
+    .px2rem(height,88);
     .flexbox();
     text-align: center;
   }
@@ -18,9 +18,9 @@
     display: block;
     width: 100%;
     padding: 0;
-    font-size: .85rem;
+    .font-dpr(17px);
     font-weight: normal;
-    line-height: 2.2rem;
+    .px2rem(line-height,88);
     color: #3d4145;
     text-align: center;
     white-space: nowrap;
@@ -30,10 +30,28 @@
     position: absolute;
     right: 0;
     box-sizing: border-box;
-    height: 2.2rem;
-    line-height: 2.2rem;
+    .px2rem(height,88);
+    .px2rem(line-height,88);
     color: @color-primary;
     z-index: 1;
-    padding: 0 .5rem;
+    .px2rem(padding-left,30);
+    .px2rem(padding-right,30);
+  }
+}
+.weui_cell{
+  .font-dpr(17px);
+  .px2rem(padding-top,20);
+  .px2rem(padding-bottom,20);
+  .px2rem(padding-left,30);
+  .px2rem(padding-right,30);
+}
+.weui_cells_radio{
+  .weui_cell_ft{
+    .px2rem(padding-left,10);
+    .px2rem(padding-right,10);
+  }
+
+  .weui_check:checked+.weui_icon_checked:before{
+    .font-dpr(16px);
   }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" id="j_single">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -13,49 +13,60 @@
 
 <!--wrap-->
 <div id="wrap">
-    <section class="player-box">
+    <section class="player-box" v-cloak>
         <div class="player-animation">
-            <div v-bind:class="['player-center-box',isplay ? 'change-sm':'']"></div>
+            <div v-bind:class="['player-center-box',singledata.isplay ? 'change-sm':'']"></div>
         </div>
         <div class="play-operate">
             <div class="play-infor">
-                <h2 v-cloak>{{name}}</h2>
-                <p v-cloak><span> {{sec}}</span></p>
+                <h2 v-text="singledata.name"></h2>
+                <p v-text="singledata.sec"></p>
             </div>
             <!--试听的audio-->
-            <audio :src=content id="try" style="display:none"></audio>
+            <audio :src=singledata.content id="try" style="display:none"></audio>
             <div class="play-btn">
+
                 <!-- play -->
-                <a class="play-lg-icon" href="javascript:;" v-show="!isplay" v-on:click.stop.prevent="try(content)"></a>
+                <a class="play-lg-icon" href="javascript:;"
+                v-show="!singledata.isplay"
+                v-on:click.stop.prevent="try()"></a>
+
                 <!-- stop -->
-                <a class="stop-lg-icon" href="javascript:;" v-show="isplay" v-on:click.stop.prevent="stoptry()"></a>
+                <a class="stop-lg-icon" href="javascript:;"
+                v-show="singledata.isplay"
+                v-on:click.stop.prevent="stoptry()"></a>
+
             </div>
             <div class="play-other-operate">
                 <a href="javascript:;" v-on:click.stop.prevent="demand()">
                     <i class="demand-w-icon"></i>
                     点播
                 </a>
-                <a href="javascript:;" v-on:click.stop.prevent="addfav()" v-show="!islike">
+                <a href="javascript:;" v-on:click.stop.prevent="addfav()" v-show="!singledata.islike">
                     <i class="favorites-w-icon"></i>
                     收藏
                 </a>
-                <a class="active" href="javascript:;" v-on:click.stop.prevent="dellike()" v-show="islike">
+                <a class="active" href="javascript:;" v-on:click.stop.prevent="dellike()" v-show="singledata.islike">
                     <i class="favorites-w-icon"></i>
-                    收藏
+                    取消收藏
                 </a>
                 <a href="javascript:;" v-on:click.stop.prevent="download()">
                     <i class="add-w-icon"></i>
                     添加
                 </a>
             </div>
+            <p class="copyright-detail" v-show="babateng" v-cloak>Powered by roobo</p>
         </div>
 
     </section>
 
 </div>
 
+    <input type="text" id="select" style="display:none">
+
 <!--include footer-->
 @@include('templates/widget_footer.html')
+
 <script type='text/javascript' src='static/js/components/single.js'></script>
 
 <!--include 统计-->

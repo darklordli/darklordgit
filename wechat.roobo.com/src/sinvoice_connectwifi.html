@@ -10,7 +10,7 @@
     @@include('templates/widget_header.html')
 
     <script>
-        getDeviceId(window.openId);
+        setTimeout("getDeviceId(localStorage.openId)",200)
     </script>
 </head>
 
@@ -44,7 +44,7 @@
         <a id="btnConnect">连接</a>
     </div>
     <!--<input type="hidden" name="openid" value="oTv0AxFhlHCj0CsFY9IwsOb511NI" />-->
-    <!--<input type="hidden" name="deviceId" value="3000000000100007_207" />-->
+    <!--<input type="hidden" name="deviceId" value="3000000000100009_123" />-->
 </div>
 
 
@@ -98,7 +98,7 @@
 
 <script src="static/js/lib/mqttws31.js"></script>
 <script src="static/js/lib/audiojs/audio.js"></script>
-<script src="static/js/modules/mqttclient.js"></script>
+<script src="static/js/lib/mqttclient.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="static/js/modules/wx.config.js"></script>
 <script src="static/js/components/wifi.js"></script>

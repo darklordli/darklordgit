@@ -2,7 +2,7 @@
 <html lang="zh-CN" id="J_my">
 <head>
     <meta charset="utf-8">
-    <title>我的</title>
+    <title v-text="title"></title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -32,24 +32,23 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
 <link rel="stylesheet" href="static/css/weui-a747b2c97e.min.css">
-<link rel="stylesheet" href="static/css/jquery-weui-bd189cf432.css">
-<link rel="stylesheet" href="static/css/app-caa46d4391.css">
+<link rel="stylesheet" href="static/css/jquery-weui-b76c9e6ade.css">
+<link rel="stylesheet" href="static/css/app-8d9c2e7f2b.css">
 <script src="static/js/components/pxtorem-4e4ea649b7.js"></script>
 
 <!--<script type='text/javascript' src='static/js/lib/1.11.3/jquery-835146b2f7.js' charset='utf-8'></script>-->
 <!--<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
 
-<script type='text/javascript' src='static/js/config/juli_config-9cca9a9cfd.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/config/juli_config-079eaa7cf6.js' charset='utf-8'></script>
+<style>[v-cloak] {display: none!important}</style>
 
-<script src="static/js/modules/getopenid-1bf4b910cd.js"></script>
-<script type='text/javascript' src='static/js/util/utils-a46f9bf22f.js' charset='utf-8'></script>
+
+<script src="static/js/modules/getopenid-3d97e9f34d.js"></script>
+<script type='text/javascript' src='static/js/util/utils-3643d49506.js' charset='utf-8'></script>
 
     <script>
-        //如果没有绑定设备--提示并返回
-        if (!utils.getdevice()){
-            window.location.href = 'doscaninfo.html';
-        }
+        setTimeout("getDeviceId(localStorage.openId)",200)
     </script>
 </head>
 <body id="uc">
@@ -72,7 +71,7 @@
                             <i class="favorites-icon"></i>
                             收藏
                         </span>
-                    <b class="rb-right" v-cloak>{{fav.length}}</b>
+                    <b class="rb-right" v-text="fav.length" v-if="fav.length"></b>
                 </a>
             </li>
             <li>
@@ -81,68 +80,50 @@
                              <i class="history-icon"></i>
                             点播历史
                         </span>
-                    <b class="rb-right" v-cloak>{{history.length}}</b>
+                    <b class="rb-right" v-text="history.length" v-if="history.length"></b>
                 </a>
             </li>
         </ul>
     </section>
     <section class="mode-list">
+
         <div class="mode-list-hd clearfix">
             <h3 class="rb-left">
                 <i class="list-icon"></i>
                 播放列表/
-                <b v-cloak>{{playlist.length}}</b>
+                <b v-text="playtracklist.length" v-if="loading==false"></b>个
             </h3>
-            <!--<a class="clean-list rb-right" href="javascript:;">清空</a>-->
+            <!-- <button class="rb-right add-btn" type="button"
+            v-on:click.stop.prevent="defaultall()">恢复默认列表</button> -->
         </div>
-        <div class="mode-list-bd">
-            <ul>
-                <li v-for="item in playlist">
-                    <a class="mode-df" href="#"
-                    v-on:click.stop.prevent="singleview(item)">
-                        <!-- play -->
-                        <button class="ui-play" type="button" v-show="!item.isplay" v-on:click.stop.prevent="play(item)">
-                            <i class="play-icon"></i>
-                        </button>
-                        <!-- stop -->
-                        <button class="ui-stop" type="button" v-show="item.isplay" v-on:click.stop.prevent="pause(item)">
-                            <i class="stop-icon"></i>
-                        </button>
-                        <div class="mode-inner">
-                            <p v-cloak>{{item.title}}</p>
-                            <span class="single-time" v-cloak>{{item.sec}}</span>
-                        </div>
-                        <div class="mode-control">
-                            <!-- 收藏 -->
-                            <button class="favorites-btn" type="button" v-show="!item.islike" v-on:click.stop.prevent="addfav(item)">
-                                <i class="fav-icon"></i>
-                            </button>
-                            <!-- 已收藏 -->
-                            <button class="favorites-btn favorites-btn-active" type="button" v-show="item.islike" v-on:click.stop.prevent="dellike(item)">
-                                <i class="fav-icon"></i>
-                            </button>
-                            <button class="close-btn" type="button" v-on:click.stop.prevent="remove(item)">
-                                <i class="close-icon"></i>
-                            </button>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+
+        <p v-if="loading" class="v-loading">加载中...</p>
+        <section class="story-list">
+            <div class="story-list-bd" v-if="loading==false" transition="show" v-cloak>
+                <ul>
+                    <li v-for="item in playtracklist">
+                        <a class="link-icon mylist" v-on:click.stop.prevent="linklist(item)">
+                            <span v-text="item.name">名字</span>
+                            <b class="rb-right" v-text="item.trackCount">31</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </section>
 </div>
 
 <!--include footer-->
-<!--<script type='text/javascript' src='static/js/lib/vue-4f718d0686.js' charset='utf-8'></script>-->
+<!--<script type='text/javascript' src='static/js/lib/vue-cd279402bf.js' charset='utf-8'></script>-->
 <!--<script src="static/js/lib/jquery-weui-9911829e41.min.js"></script>-->
 
 <script src="//cdn.bootcss.com/vue/1.0.26/vue.js"></script>
 <script src="//cdn.bootcss.com/jquery-weui/0.8.0/js/jquery-weui.min.js"></script>
 
 <script src="static/js/lib/mqttws31-5164ce8625.js"></script>
-<script src="static/js/lib/mqttclient-e25774ed12.js"></script>
+<script src="static/js/lib/mqttclient-fc76ad90c1.js"></script>
 
-<script type='text/javascript' src='static/js/components/my-33e4231d15.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/js/components/my-005c3e232b.js' charset='utf-8'></script>
 
 <!--include 统计-->
 <div class="rb-hide">
