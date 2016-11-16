@@ -1,1 +1,0 @@
-!function(i,n,e){"use strict";function o(){var i="MTIzNDU2Nzg5MDEyMzQ1Ng==";wx.invoke("configWXDeviceWiFi",{key:i},function(i){wx.closeWindow()})}wx.ready(function(){wx.hideOptionMenu(),o()})}(jQuery,window);

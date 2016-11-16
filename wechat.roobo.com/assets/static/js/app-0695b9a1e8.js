@@ -1,1 +1,0 @@
-!function(t,c,i){"use strict";FastClick.attach(document.body)}(jQuery,window);
