@@ -19,3 +19,5 @@
 后续打算把这个项目当成vue.js的新特性的试验田。
 （新坑记录一下：之前是通过JQ的ajax回调，在异步的done回调中生成vue实例，把返回的数据付给vue实例，这次尝试先生成VUE实例，在vue实例的ready生命周期中，通过ajax拿到数据付给这个vue。但似乎有问题一直不成功，。
 后续打算使用vue-resoure或者fetchAPI替换下。mark）
+
+结构图：
