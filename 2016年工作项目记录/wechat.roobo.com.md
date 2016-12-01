@@ -80,7 +80,8 @@ PS: 经过开发体验，MQTT非常强大，搭建一个MQTT的消息SERVER成�
 
 后续会研究一下VUE官方的 cli（https://github.com/vuejs/vue-cli）生成的模板，将项目迁移为组件化的形式，提高其可维护性和可扩展性...
 
-![https://raw.githubusercontent.com/darklordli/darklordgit/master/%E7%82%AC%E5%8A%9B%E5%85%AC%E4%BC%97%E5%8F%B7%E6%9E%B6%E6%9E%84%E5%9B%BE.png]()
+<img src="https://raw.githubusercontent.com/darklordli/darklordgit/master/%E7%82%AC%E5%8A%9B%E5%85%AC%E4%BC%97%E5%8F%B7%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+
 
 ######2016/9/8 mark一下使用vue中遇到的一个诡异bug：
 
