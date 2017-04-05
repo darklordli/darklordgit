@@ -1,0 +1,9 @@
+.idea
+.idea/
+.DS_Store
+node_modules/
+deploy/
+dist/
+.project
+npm-debug.log
+dist.zip

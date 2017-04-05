@@ -1,0 +1,1 @@
+gulp clean-dist & npm run test & gulp copy & gulp res-deploy
