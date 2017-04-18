@@ -19,9 +19,55 @@ iView 是一套基于 Vue.js 的开源 UI 组件库，在3月初的时候发布�
 简单调研后迅速搭建了项目框架，并安利给了同项目的其他研发工程师。 依然采用postman管理接口。
 在一个月时间内完成研发并上线。
 
+*  vue中的ref:
+此项目，是由iView 组件库搭建而成的，而iview中的部分组件，有其自身的events（组件的事件），和methods(组件的方法)：
+
+1.对于events，只需要在vue调用的模版中通过 @事件名=“自己定义的方法名” 来调用事件，如tree组件：
+    <Tree
+    :data="classifylist"
+    *@on-select-change="gettaglist"*
+    *@on-check-change="getcheckclass"*
+    show-checkbox>
+    </Tree>
+
+on-select-change表示tree组件自己的获取已选择的节点的事件，这样在后面定义的gettaglist方法中，就会自动的获得当前已选中的节点数组作为参数调用。
+
+vue中组件 使用v-on绑定自定义事件：
+[https://cn.vuejs.org/v2/guide/components.html#使用-v-on-绑定自定义事件](https://cn.vuejs.org/v2/guide/components.html#使用-v-on-绑定自定义事件)
+
+2.对于methods,则需要从js,也就是根组件中直接访问并获取子组件，在子组件上调用他的methods,
+这样就需要用到vue的子组件索引属性:ref
+
+>ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素; 如果用在子组件上，引用就指向组件实例:
+
+    <!-- vm.$refs.p will be the DOM node -->
+    <p *ref="p"*>hello</p>
+    <!-- vm.$refs.child will be the child comp instance -->
+    <child-comp *ref="child"*></child-comp>
+
+>当 v-for 用于元素或组件的时候，引用信息将是包含 DOM 节点或组件实例的数组。
+
+如此以来，通过ref不仅能够获得子组件，还能够获得dom元素，使得vue架构跟过往的 jquery 能够结合到一起。
+通过ref来获取子组件及调用子组件方法：
+
+    <Tree
+    :data="classifylist"
+    *v-ref:class*
+    @on-select-change="gettaglist"
+    @on-check-change="getcheckclass"
+    show-checkbox>
+    </Tree>
+
+    *let classes = this.$refs.class.getCheckedNodes();*
+
+getCheckedNodes方法为tree子组件方法，可以获取被勾选的节点
+
 ###update 4.5
 
 项目已上线并迭代中，源码斗胆放github上
+
+
+
 
 ##iview：
 [http://v1.iviewui.com/](http://v1.iviewui.com/)
