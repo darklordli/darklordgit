@@ -14,7 +14,10 @@
 *   采用的技术要点：
 
 因为最近一直在关注vue框架以及生态的发展，在3月初的时候 iview发布了其1.0的正式版本，简单了解之后发现其是用来快速搭建pc端中后台系统的绝好产品。
+
 iView 是一套基于 Vue.js 的开源 UI 组件库，在3月初的时候发布了基于vue的1.0版本，3月下旬发布了基于vue2.0的版本，其UI 是以 Ant.Design 为雏形，视觉表现上美观，简洁，包含了40余个组件，能够满足绝大部分的使用需求。并为用户带来了 良好的使用体验。
+
+![iview](https://file.iviewui.com/dist/fe8d29da1225d943e30f9ee1bddce78f.png)
 
 简单调研后迅速搭建了项目框架，并安利给了同项目的其他研发工程师。 依然采用postman管理接口。
 在一个月时间内完成研发并上线。
@@ -23,10 +26,11 @@ iView 是一套基于 Vue.js 的开源 UI 组件库，在3月初的时候发布�
 此项目，是由iView 组件库搭建而成的，而iview中的部分组件，有其自身的events（组件的事件），和methods(组件的方法)：
 
 1.对于events，只需要在vue调用的模版中通过 @事件名=“自己定义的方法名” 来调用事件，如tree组件：
+
     <Tree
     :data="classifylist"
-    *@on-select-change="gettaglist"*
-    *@on-check-change="getcheckclass"*
+    @on-select-change="gettaglist"
+    @on-check-change="getcheckclass"
     show-checkbox>
     </Tree>
 
@@ -58,7 +62,7 @@ vue中组件 使用v-on绑定自定义事件：
     show-checkbox>
     </Tree>
 
-    *let classes = this.$refs.class.getCheckedNodes();*
+    let classes = this.$refs.class.getCheckedNodes();
 
 getCheckedNodes方法为tree子组件方法，可以获取被勾选的节点
 
