@@ -13,11 +13,24 @@
     "sitemap"
   ],
   "pluginsConfig": {
+    "disqus": {
+      "shortName": "roobo"
+    },
+    "editlink": {
+      "base": "",
+      "label": "编辑本页"
+    },
     "github": {
       "url": "https://github.com/darklordli"
     },
+    "baidu": {
+        "token": "a9787f0ab45d5e237bab522431d0a7ec"
+    },
     "theme-gestalt": {
         "excludeDefaultStyles": true
+    },
+    "sitemap": {
+        "hostname": ""
     }
   }
 }

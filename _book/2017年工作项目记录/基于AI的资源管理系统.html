@@ -1,10 +1,10 @@
 
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="zh" >
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>基于AI的资源管理系统 · GitBook</title>
+        <title>基于AI的资源管理系统 · Roobo前端项目目录</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -17,7 +17,15 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
                 
             
                 
@@ -69,7 +77,7 @@
         
             
 <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
+    <input type="text" placeholder="輸入並搜尋" />
 </div>
 
             
@@ -294,7 +302,7 @@
 
     <li>
         <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
+            本書使用 GitBook 釋出
         </a>
     </li>
 </ul>
@@ -355,12 +363,12 @@
 &#x6B64;&#x9879;&#x76EE;&#xFF0C;&#x662F;&#x7531;iView &#x7EC4;&#x4EF6;&#x5E93;&#x642D;&#x5EFA;&#x800C;&#x6210;&#x7684;&#xFF0C;&#x800C;iview&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x7EC4;&#x4EF6;&#xFF0C;&#x6709;&#x5176;&#x81EA;&#x8EAB;&#x7684;events&#xFF08;&#x7EC4;&#x4EF6;&#x7684;&#x4E8B;&#x4EF6;&#xFF09;&#xFF0C;&#x548C;methods(&#x7EC4;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;)&#xFF1A;</li>
 </ul>
 <p>1.&#x5BF9;&#x4E8E;events&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;vue&#x8C03;&#x7528;&#x7684;&#x6A21;&#x7248;&#x4E2D;&#x901A;&#x8FC7; @&#x4E8B;&#x4EF6;&#x540D;=&#x201C;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x540D;&#x201D; &#x6765;&#x8C03;&#x7528;&#x4E8B;&#x4EF6;&#xFF0C;&#x5982;tree&#x7EC4;&#x4EF6;&#xFF1A;</p>
-<pre><code>&lt;Tree
-:data=&quot;classifylist&quot;
-@on-select-change=&quot;gettaglist&quot;
-@on-check-change=&quot;getcheckclass&quot;
-show-checkbox&gt;
-&lt;/Tree&gt;
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Tree</span>
+<span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>classifylist<span class="token punctuation">&quot;</span></span>
+<span class="token attr-name">@on-select-change</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>gettaglist<span class="token punctuation">&quot;</span></span>
+<span class="token attr-name">@on-check-change</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>getcheckclass<span class="token punctuation">&quot;</span></span>
+<span class="token attr-name">show-checkbox</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Tree</span><span class="token punctuation">&gt;</span></span>
 </code></pre><p>on-select-change&#x8868;&#x793A;tree&#x7EC4;&#x4EF6;&#x81EA;&#x5DF1;&#x7684;&#x83B7;&#x53D6;&#x5DF2;&#x9009;&#x62E9;&#x7684;&#x8282;&#x70B9;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x8FD9;&#x6837;&#x5728;&#x540E;&#x9762;&#x5B9A;&#x4E49;&#x7684;gettaglist&#x65B9;&#x6CD5;&#x4E2D;&#xFF0C;&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x7684;&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x5DF2;&#x9009;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x6570;&#x7EC4;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x3002;</p>
 <p>vue&#x4E2D;&#x7EC4;&#x4EF6; &#x4F7F;&#x7528;v-on&#x7ED1;&#x5B9A;&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;&#xFF1A;
 <a href="https://cn.vuejs.org/v2/guide/components.html#&#x4F7F;&#x7528;-v-on-&#x7ED1;&#x5B9A;&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;" target="_blank">https://cn.vuejs.org/v2/guide/components.html#&#x4F7F;&#x7528;-v-on-&#x7ED1;&#x5B9A;&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;</a></p>
@@ -369,22 +377,22 @@ show-checkbox&gt;
 <blockquote>
 <p>ref &#x88AB;&#x7528;&#x6765;&#x7ED9;&#x5143;&#x7D20;&#x6216;&#x5B50;&#x7EC4;&#x4EF6;&#x6CE8;&#x518C;&#x5F15;&#x7528;&#x4FE1;&#x606F;&#x3002;&#x5F15;&#x7528;&#x4FE1;&#x606F;&#x5C06;&#x4F1A;&#x6CE8;&#x518C;&#x5728;&#x7236;&#x7EC4;&#x4EF6;&#x7684; $refs &#x5BF9;&#x8C61;&#x4E0A;&#x3002;&#x5982;&#x679C;&#x5728;&#x666E;&#x901A;&#x7684; DOM &#x5143;&#x7D20;&#x4E0A;&#x4F7F;&#x7528;&#xFF0C;&#x5F15;&#x7528;&#x6307;&#x5411;&#x7684;&#x5C31;&#x662F; DOM &#x5143;&#x7D20;; &#x5982;&#x679C;&#x7528;&#x5728;&#x5B50;&#x7EC4;&#x4EF6;&#x4E0A;&#xFF0C;&#x5F15;&#x7528;&#x5C31;&#x6307;&#x5411;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;:</p>
 </blockquote>
-<pre><code>&lt;!-- vm.$refs.p will be the DOM node --&gt;
-&lt;p *ref=&quot;p&quot;*&gt;hello&lt;/p&gt;
-&lt;!-- vm.$refs.child will be the child comp instance --&gt;
-&lt;child-comp *ref=&quot;child&quot;*&gt;&lt;/child-comp&gt;
+<pre class="language-"><code><span class="token comment" spellcheck="true">&lt;!-- vm.$refs.p will be the DOM node --&gt;</span>
+&lt;p *ref=&quot;p&quot;*&gt;hello<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment" spellcheck="true">&lt;!-- vm.$refs.child will be the child comp instance --&gt;</span>
+&lt;child-comp *ref=&quot;child&quot;*&gt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>child-comp</span><span class="token punctuation">&gt;</span></span>
 </code></pre><blockquote>
 <p>&#x5F53; v-for &#x7528;&#x4E8E;&#x5143;&#x7D20;&#x6216;&#x7EC4;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5F15;&#x7528;&#x4FE1;&#x606F;&#x5C06;&#x662F;&#x5305;&#x542B; DOM &#x8282;&#x70B9;&#x6216;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x7684;&#x6570;&#x7EC4;&#x3002;</p>
 </blockquote>
 <p>&#x5982;&#x6B64;&#x4EE5;&#x6765;&#xFF0C;&#x901A;&#x8FC7;ref&#x4E0D;&#x4EC5;&#x80FD;&#x591F;&#x83B7;&#x5F97;&#x5B50;&#x7EC4;&#x4EF6;&#xFF0C;&#x8FD8;&#x80FD;&#x591F;&#x83B7;&#x5F97;dom&#x5143;&#x7D20;&#xFF0C;&#x4F7F;&#x5F97;vue&#x67B6;&#x6784;&#x8DDF;&#x8FC7;&#x5F80;&#x7684; jquery &#x80FD;&#x591F;&#x7ED3;&#x5408;&#x5230;&#x4E00;&#x8D77;&#x3002;
 &#x901A;&#x8FC7;ref&#x6765;&#x83B7;&#x53D6;&#x5B50;&#x7EC4;&#x4EF6;&#x53CA;&#x8C03;&#x7528;&#x5B50;&#x7EC4;&#x4EF6;&#x65B9;&#x6CD5;&#xFF1A;</p>
-<pre><code>&lt;Tree
-:data=&quot;classifylist&quot;
-*v-ref:class*
-@on-select-change=&quot;gettaglist&quot;
-@on-check-change=&quot;getcheckclass&quot;
-show-checkbox&gt;
-&lt;/Tree&gt;
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Tree</span>
+<span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>classifylist<span class="token punctuation">&quot;</span></span>
+<span class="token attr-name"><span class="token namespace">*v-ref:</span>class*</span>
+<span class="token attr-name">@on-select-change</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>gettaglist<span class="token punctuation">&quot;</span></span>
+<span class="token attr-name">@on-check-change</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>getcheckclass<span class="token punctuation">&quot;</span></span>
+<span class="token attr-name">show-checkbox</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Tree</span><span class="token punctuation">&gt;</span></span>
 
 let classes = this.$refs.class.getCheckedNodes();
 </code></pre><p>getCheckedNodes&#x65B9;&#x6CD5;&#x4E3A;tree&#x5B50;&#x7EC4;&#x4EF6;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x88AB;&#x52FE;&#x9009;&#x7684;&#x8282;&#x70B9;</p>
@@ -431,7 +439,7 @@ let classes = this.$refs.class.getCheckedNodes();
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"基于AI的资源管理系统","level":"1.3.1","depth":2,"next":{"title":"布丁机器人app 微信小程序","level":"1.3.2","depth":2,"path":"2017年工作项目记录/布丁机器人app 微信小程序.md","ref":"2017年工作项目记录/布丁机器人app 微信小程序.md","articles":[]},"previous":{"title":"2-2017年工作项目记录","level":"1.3","depth":1,"ref":"","articles":[{"title":"基于AI的资源管理系统","level":"1.3.1","depth":2,"path":"2017年工作项目记录/基于AI的资源管理系统.md","ref":"2017年工作项目记录/基于AI的资源管理系统.md","articles":[]},{"title":"布丁机器人app 微信小程序","level":"1.3.2","depth":2,"path":"2017年工作项目记录/布丁机器人app 微信小程序.md","ref":"2017年工作项目记录/布丁机器人app 微信小程序.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"2017年工作项目记录/基于AI的资源管理系统.md","mtime":"2017-07-05T03:28:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-05T06:21:06.397Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"基于AI的资源管理系统","level":"1.3.1","depth":2,"next":{"title":"布丁机器人app 微信小程序","level":"1.3.2","depth":2,"path":"2017年工作项目记录/布丁机器人app 微信小程序.md","ref":"2017年工作项目记录/布丁机器人app 微信小程序.md","articles":[]},"previous":{"title":"2-2017年工作项目记录","level":"1.3","depth":1,"ref":"","articles":[{"title":"基于AI的资源管理系统","level":"1.3.1","depth":2,"path":"2017年工作项目记录/基于AI的资源管理系统.md","ref":"2017年工作项目记录/基于AI的资源管理系统.md","articles":[]},{"title":"布丁机器人app 微信小程序","level":"1.3.2","depth":2,"path":"2017年工作项目记录/布丁机器人app 微信小程序.md","ref":"2017年工作项目记录/布丁机器人app 微信小程序.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["disqus","github","editlink","prism","-highlight","baidu","splitter","sitemap","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"disqus":{"useIdentifier":false,"shortName":"roobo"},"github":{"url":"https://github.com/darklordli"},"editlink":{"label":"编辑本页","multilingual":false,"base":""},"livereload":{},"theme-gestalt":{"excludeDefaultStyles":true},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sitemap":{"hostname":""},"baidu":{"token":"a9787f0ab45d5e237bab522431d0a7ec"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Roobo前端项目目录","language":"zh","gitbook":"*","description":"Roobo前端项目目录"},"file":{"path":"2017年工作项目记录/基于AI的资源管理系统.md","mtime":"2017-07-05T03:28:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-05T06:40:35.214Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -439,6 +447,30 @@ let classes = this.$refs.class.getCheckedNodes();
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-baidu/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
