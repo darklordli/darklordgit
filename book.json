@@ -1,0 +1,23 @@
+{
+  "title": "Roobo前端项目目录",
+  "description": "Roobo前端项目目录",
+  "language": "zh",
+  "plugins": [
+    "disqus",
+    "github",
+    "editlink",
+    "prism",
+    "-highlight",
+    "baidu",
+    "splitter",
+    "sitemap"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/darklordli"
+    },
+    "theme-gestalt": {
+        "excludeDefaultStyles": true
+    }
+  }
+}
