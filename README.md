@@ -9,6 +9,7 @@
 * gulp构建自动化  源目录 src 输出目录 website，页面公共部分抽出为组件
 
 * less及sass预编译
+
 * 采用fontmin技术使字体字迹化并使用css的font-face实现自定义字体加载
 * pc端与移动端采用响应式设计，是一套页面兼容适配全端
 
@@ -30,6 +31,7 @@
 * 前后端分离，面向接口开发，ajax异步编程
 
 * 采用arttemplate模板渲染数据并封装到html中
+
 * pc端与移动端采用响应式设计，是一套页面兼容适配全端
 * 后端返回数据采用跨域资源共享，Cross-Origin Resource Sharing ，使得才兼容html5的浏览器上实现AJAX跨域
 * IE8,IE9等不支持CORS的浏览器上，尝试采用jquery.xdomainrequest.js实现ajax跨域，目前还有问题，正在尝试中
@@ -52,6 +54,7 @@ PS:目前的前端架构依然采用的是传统的js字符串模板\(art templa
 * 根据用户代理UA判断浏览平台跳转到不同站点，如移动端则跳转到m站，m.pudding.roobo.com
 
 * 首页采用video标签播放html5格式视频，并且在视频加载完毕之前显示封面图（第一帧）
+
 * 采用fullpage.js实现全屏滚动，后效果欠佳未采用
 * 采用amazeui框架（支持国产）实现部分交互效果，如动画，导航滚动等
 * 使用jquery的mousewheel插件监听处理鼠标滑动，在mac的触摸屏上出现问题，有待修复
@@ -98,6 +101,7 @@ PS:目前的前端架构依然采用的是传统的js字符串模板\(art templa
 * 前后端分离，面向接口开发，ajax异步编程
 
 * 采用arttemplate模板渲染数据并封装到html中
+
 * pc端与移动端采用响应式设计，是一套页面兼容适配全端
 * 后端返回数据采用跨域资源共享，Cross-Origin Resource Sharing ，使得才兼容html5的浏览器上实现AJAX跨域
 * IE8,IE9等不支持CORS的浏览器上，尝试采用jquery.xdomainrequest.js实现ajax跨域，目前还有问题，正在尝试中
